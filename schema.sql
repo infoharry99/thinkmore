@@ -1,11 +1,10 @@
 -- =========================================================
 -- ThinkClear Application Complete MySQL Database DDL Schema
--- Includes Full Phase 1 Curriculum (Days 1 to 20)
--- Compatible with MySQL 5.7+ / MySQL 8.0+ / MariaDB
+-- Compatible with MySQL 5.7+ / MySQL 8.0+ / MariaDB / phpMyAdmin
 -- =========================================================
 
-CREATE DATABASE IF NOT EXISTS `thinkclear_db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `thinkclear_db`;
+CREATE DATABASE IF NOT EXISTS `bookmyre_thinkclear` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `bookmyre_thinkclear`;
 
 -- Disable Foreign Key checks temporarily for clean setup
 SET FOREIGN_KEY_CHECKS = 0;
@@ -29,13 +28,13 @@ CREATE TABLE `users` (
   `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL UNIQUE,
-  `provider` VARCHAR(50) NULL DEFAULT NULL, -- 'google', 'apple'
+  `provider` VARCHAR(50) NULL DEFAULT NULL,
   `provider_id` VARCHAR(255) NULL DEFAULT NULL,
   `email_verified_at` TIMESTAMP NULL DEFAULT NULL,
   `password` VARCHAR(255) NULL DEFAULT NULL,
-  `role` VARCHAR(50) NOT NULL DEFAULT 'user', -- 'user' or 'admin'
-  `current_day` INT NOT NULL DEFAULT 1, -- 1 to 60
-  `phase` INT NOT NULL DEFAULT 0, -- 0 (Onboarding), 1 (Guided), 2 (Semi-Guided), 3 (Independent)
+  `role` VARCHAR(50) NOT NULL DEFAULT 'user',
+  `current_day` INT NOT NULL DEFAULT 1,
+  `phase` INT NOT NULL DEFAULT 0,
   `remember_token` VARCHAR(100) NULL DEFAULT NULL,
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -77,25 +76,25 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `cases` (
   `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `day_number` INT NOT NULL DEFAULT 1,
-  `case_id` VARCHAR(50) NOT NULL UNIQUE, -- e.g. P1-001
-  `domain` VARCHAR(100) NOT NULL, -- e.g. Relationships, Workplace, Family, Health, Career
+  `case_id` VARCHAR(50) NOT NULL UNIQUE,
+  `domain` VARCHAR(100) NOT NULL,
   `primary_trap` VARCHAR(100) NULL DEFAULT NULL,
   `secondary_trap` VARCHAR(100) NULL DEFAULT NULL,
   `difficulty` VARCHAR(50) NOT NULL DEFAULT 'Beginner',
   `primary_skill` VARCHAR(100) NULL DEFAULT NULL,
   `mission` TEXT NULL DEFAULT NULL,
   `learning_objective` TEXT NULL DEFAULT NULL,
-  `phase_target` INT NOT NULL DEFAULT 1, -- 1, 2, or 3
-  `trap_target` JSON NOT NULL,
+  `phase_target` INT NOT NULL DEFAULT 1,
+  `trap_target` LONGTEXT NOT NULL,
   `opening_scenario` TEXT NOT NULL,
-  `step1_detect` JSON NULL DEFAULT NULL,
-  `step2_decode` JSON NULL DEFAULT NULL,
-  `step3_reality_check` JSON NULL DEFAULT NULL,
-  `step4_reframe` JSON NULL DEFAULT NULL,
-  `step5_intervention` JSON NULL DEFAULT NULL,
-  `step6_internalize` JSON NULL DEFAULT NULL,
+  `step1_detect` LONGTEXT NULL DEFAULT NULL,
+  `step2_decode` LONGTEXT NULL DEFAULT NULL,
+  `step3_reality_check` LONGTEXT NULL DEFAULT NULL,
+  `step4_reframe` LONGTEXT NULL DEFAULT NULL,
+  `step5_intervention` LONGTEXT NULL DEFAULT NULL,
+  `step6_internalize` LONGTEXT NULL DEFAULT NULL,
   `closing_reflection` TEXT NULL DEFAULT NULL,
-  `developer_notes` JSON NULL DEFAULT NULL,
+  `developer_notes` LONGTEXT NULL DEFAULT NULL,
   `recurrence_case_id` VARCHAR(50) NULL DEFAULT NULL,
   `is_active` TINYINT(1) NOT NULL DEFAULT 1,
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
@@ -203,8 +202,8 @@ INSERT INTO `cases` (`id`, `day_number`, `case_id`, `domain`, `primary_trap`, `d
 'Ananya sends her husband a message during lunch asking him to call when he is free. He reads the message. Three hours pass. There is still no reply.',
 '{"fact_prompt": "Write only the facts.", "story_prompt": "Now write the story/assumptions your mind is creating.", "insight": "Your brain creates stories automatically. Your first responsibility is to separate them from facts.", "model_fact": "He read my message three hours ago and hasn\'t replied.", "model_story": "He is upset with me and is ignoring me."}',
 '{"options": ["Catastrophizing - Assuming the absolute worst outcome.", "Mind Reading - Assuming others\' intentions without evidence.", "Emotional Reasoning - Treating a feeling as proof of reality."], "correct_trap": "Mind Reading", "explanation": "The only confirmed fact is that there has been no reply. The story is that he is upset and deliberately ignoring her. There is no evidence to support that conclusion."}',
-'{"q1": "What fact do you know for certain?", "q2": "What are you assuming?", "q3": "What evidence supports your assumption?", "q4": "What evidence contradicts it?", "q5": "If someone else described this situation, what would you tell them?", "tip": "Ask \"What happened?\" before asking \"How are you feeling?\""}',
+'{"q1": "What fact do you know for certain?", "q2": "What are you assuming?", "q3": "What evidence supports your assumption?", "q4": "What evidence contradicts it?", "q5": "If someone else described this situation, what would you tell them?", "tip": "Ask What happened? before asking How are you feeling?"}',
 '{"prompt": "Write at least 3 other explanations that also fit the facts.", "model_reframe": ["He got busy at work.", "He planned to reply later and forgot.", "He is driving.", "His phone battery died."], "challenge_prompt": "Can you think of one more explanation that also fits the facts?"}',
-'{"prompt": "Based on the evidence available, what is one thoughtful action you can take?", "model_action": "Wait until the end of the workday. If there is still no reply, send one calm message: \"Just checking if everything is okay. Call me when you\'re free.\"", "reminder": "There isn\'t always a perfect action. There is usually one reasonable action based on the evidence available."}',
-'{"prompt": "Complete this sentence: \"Today I learned that...\"", "model_principle": "A delayed reply is a fact. Being ignored is a story/assumptions until evidence proves otherwise."}',
+'{"prompt": "Based on the evidence available, what is one thoughtful action you can take?", "model_action": "Wait until the end of the workday. If there is still no reply, send one calm message: Just checking if everything is okay. Call me when you are free.", "reminder": "There isn\'t always a perfect action. There is usually one reasonable action based on the evidence available."}',
+'{"prompt": "Complete this sentence: Today I learned that...", "model_principle": "A delayed reply is a fact. Being ignored is a story/assumptions until evidence proves otherwise."}',
 'Where else in my life might I be confusing facts with stories?', 1);
