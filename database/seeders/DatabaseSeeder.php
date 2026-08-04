@@ -32,13 +32,13 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Arun Mishra',
                 'password' => Hash::make('password123'),
                 'role' => 'user',
-                'current_day' => 7,
-                'phase' => 1,
+                'current_day' => 1,
+                'phase' => 0,
             ]
         );
 
         $this->call([
-            CaseSeeder::class,
+            Day1To20CaseSeeder::class,
         ]);
     }
 }

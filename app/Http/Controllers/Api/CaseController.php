@@ -11,26 +11,30 @@ use Illuminate\Http\Request;
 class CaseController extends Controller
 {
     /**
-     * Get scenario case for current day
+     * Get scenario case for current day (Days 1 to 60)
      */
     public function todayCase(Request $request)
     {
         $user = $request->user();
         $day = $user->current_day;
 
-        // Fetch active case for this day or fallback to latest case
+        // Fetch exact case for current_day or fallback to matching phase
         $case = CaseStudy::where('is_active', true)
-            ->where(function ($query) use ($user) {
-                $query->where('phase_target', $user->phase)
-                      ->orWhere('phase_target', 1);
-            })
+            ->where('day_number', $day)
             ->first();
+
+        if (! $case) {
+            // Fallback to active case matching target phase
+            $case = CaseStudy::where('is_active', true)
+                ->where('phase_target', $user->phase > 0 ? $user->phase : 1)
+                ->first();
+        }
 
         if (! $case) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'No active scenario found for today.',
-            ], 444);
+            ], 404);
         }
 
         return response()->json([
@@ -38,7 +42,28 @@ class CaseController extends Controller
             'data' => [
                 'current_day' => $day,
                 'phase' => $user->phase,
-                'case' => $case,
+                'case' => [
+                    'id' => $case->id,
+                    'day_number' => $case->day_number,
+                    'case_id' => $case->case_id,
+                    'domain' => $case->domain,
+                    'primary_trap' => $case->primary_trap,
+                    'secondary_trap' => $case->secondary_trap,
+                    'difficulty' => $case->difficulty,
+                    'primary_skill' => $case->primary_skill,
+                    'mission' => $case->mission,
+                    'learning_objective' => $case->learning_objective,
+                    'phase_target' => $case->phase_target,
+                    'opening_scenario' => $case->opening_scenario,
+                    'step1_detect' => $case->step1_detect,
+                    'step2_decode' => $case->step2_decode,
+                    'step3_reality_check' => $case->step3_reality_check,
+                    'step4_reframe' => $case->step4_reframe,
+                    'step5_intervention' => $case->step5_intervention,
+                    'step6_internalize' => $case->step6_internalize,
+                    'closing_reflection' => $case->closing_reflection,
+                    'developer_notes' => $case->developer_notes,
+                ]
             ]
         ]);
     }

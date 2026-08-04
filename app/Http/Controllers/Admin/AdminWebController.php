@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminWebController extends Controller
 {
-    /**
-     * Show Admin Login Form
-     */
     public function showLoginForm()
     {
         if (Auth::check() && Auth::user()->role === 'admin') {
@@ -22,9 +19,6 @@ class AdminWebController extends Controller
         return view('admin.auth.login');
     }
 
-    /**
-     * Handle Admin Login
-     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -48,9 +42,6 @@ class AdminWebController extends Controller
         ]);
     }
 
-    /**
-     * Handle Admin Logout
-     */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -60,9 +51,6 @@ class AdminWebController extends Controller
         return redirect()->route('admin.login');
     }
 
-    /**
-     * Dashboard Overview
-     */
     public function dashboard()
     {
         $stats = [
@@ -86,103 +74,101 @@ class AdminWebController extends Controller
         return view('admin.dashboard', compact('stats', 'recentFeedbacks', 'recentUsers'));
     }
 
-    /**
-     * Cases List
-     */
     public function casesIndex()
     {
-        $cases = CaseStudy::latest()->paginate(15);
+        $cases = CaseStudy::orderBy('day_number', 'asc')->paginate(20);
         return view('admin.cases.index', compact('cases'));
     }
 
-    /**
-     * Create Case View
-     */
     public function casesCreate()
     {
         return view('admin.cases.create');
     }
 
-    /**
-     * Store Case Logic
-     */
     public function casesStore(Request $request)
     {
         $validated = $request->validate([
+            'day_number' => 'required|integer|between:1,60|unique:cases,day_number',
             'case_id' => 'required|string|unique:cases,case_id',
             'domain' => 'required|string',
+            'primary_trap' => 'required|string',
+            'difficulty' => 'required|string',
+            'primary_skill' => 'required|string',
+            'mission' => 'required|string',
+            'learning_objective' => 'required|string',
             'phase_target' => 'required|integer|between:1,3',
             'opening_scenario' => 'required|string',
             'fact_line' => 'required|string',
             'story_line' => 'required|string',
-            'trap_name' => 'required|string',
             'trap_explanation' => 'required|string',
             'action_text' => 'required|string',
             'internalize_principle' => 'required|string',
+            'closing_reflection' => 'nullable|string',
         ]);
 
         CaseStudy::create([
+            'day_number' => $validated['day_number'],
             'case_id' => $validated['case_id'],
             'domain' => $validated['domain'],
+            'primary_trap' => $validated['primary_trap'],
+            'difficulty' => $validated['difficulty'],
+            'primary_skill' => $validated['primary_skill'],
+            'mission' => $validated['mission'],
+            'learning_objective' => $validated['learning_objective'],
             'phase_target' => $validated['phase_target'],
-            'trap_target' => [$validated['trap_name']],
+            'trap_target' => [$validated['primary_trap']],
             'opening_scenario' => $validated['opening_scenario'],
             'step1_detect' => [
-                'fact' => $validated['fact_line'],
-                'story' => $validated['story_line'],
+                'fact_prompt' => 'Write only the facts.',
+                'story_prompt' => 'Now write the story your mind is creating.',
+                'model_fact' => $validated['fact_line'],
+                'model_story' => $validated['story_line'],
             ],
             'step2_decode' => [
-                'trap' => $validated['trap_name'],
+                'correct_trap' => $validated['primary_trap'],
                 'explanation' => $validated['trap_explanation'],
             ],
             'step5_intervention' => [
-                'action' => $validated['action_text'],
+                'model_action' => $validated['action_text'],
             ],
             'step6_internalize' => [
-                'principle' => $validated['internalize_principle'],
+                'model_principle' => $validated['internalize_principle'],
             ],
+            'closing_reflection' => $validated['closing_reflection'] ?? null,
             'is_active' => true,
         ]);
 
-        return redirect()->route('admin.cases.index')->with('success', 'Case study created successfully!');
+        return redirect()->route('admin.cases.index')->with('success', 'New Day Case Study created successfully!');
     }
 
-    /**
-     * Edit Case View
-     */
     public function casesEdit($id)
     {
         $case = CaseStudy::findOrFail($id);
         return view('admin.cases.edit', compact('case'));
     }
 
-    /**
-     * Update Case Logic
-     */
     public function casesUpdate(Request $request, $id)
     {
         $case = CaseStudy::findOrFail($id);
 
         $validated = $request->validate([
+            'day_number' => 'required|integer|between:1,60',
             'domain' => 'required|string',
+            'primary_trap' => 'required|string',
+            'difficulty' => 'required|string',
+            'primary_skill' => 'required|string',
+            'mission' => 'required|string',
+            'learning_objective' => 'required|string',
             'phase_target' => 'required|integer|between:1,3',
             'opening_scenario' => 'required|string',
             'is_active' => 'required|boolean',
         ]);
 
-        $case->update([
-            'domain' => $validated['domain'],
-            'phase_target' => $validated['phase_target'],
-            'opening_scenario' => $validated['opening_scenario'],
-            'is_active' => $validated['is_active'],
-        ]);
+        $case->update($validated);
 
-        return redirect()->route('admin.cases.index')->with('success', 'Case updated successfully!');
+        return redirect()->route('admin.cases.index')->with('success', 'Case study updated successfully!');
     }
 
-    /**
-     * 60-Day Foundation Feedbacks Report (PDF 1 Spec)
-     */
     public function feedbacksIndex(Request $request)
     {
         $query = FoundationFeedback::with('user')->latest();
@@ -195,9 +181,6 @@ class AdminWebController extends Controller
         return view('admin.feedbacks.index', compact('feedbacks'));
     }
 
-    /**
-     * Users & Progress Tracking List
-     */
     public function usersIndex()
     {
         $users = User::where('role', 'user')->latest()->paginate(15);

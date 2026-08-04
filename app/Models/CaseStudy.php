@@ -12,8 +12,15 @@ class CaseStudy extends Model
     protected $table = 'cases';
 
     protected $fillable = [
+        'day_number',
         'case_id',
         'domain',
+        'primary_trap',
+        'secondary_trap',
+        'difficulty',
+        'primary_skill',
+        'mission',
+        'learning_objective',
         'phase_target',
         'trap_target',
         'opening_scenario',
@@ -23,11 +30,15 @@ class CaseStudy extends Model
         'step4_reframe',
         'step5_intervention',
         'step6_internalize',
+        'closing_reflection',
+        'developer_notes',
         'recurrence_case_id',
         'is_active',
     ];
 
     protected $casts = [
+        'day_number' => 'integer',
+        'phase_target' => 'integer',
         'trap_target' => 'array',
         'step1_detect' => 'array',
         'step2_decode' => 'array',
@@ -35,7 +46,7 @@ class CaseStudy extends Model
         'step4_reframe' => 'array',
         'step5_intervention' => 'array',
         'step6_internalize' => 'array',
+        'developer_notes' => 'array',
         'is_active' => 'boolean',
-        'phase_target' => 'integer',
     ];
 }
