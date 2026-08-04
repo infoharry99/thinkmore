@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('provider')->nullable(); // 'google', 'apple'
+            $table->string('provider_id')->nullable(); // Social OAuth User ID
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable(); // Nullable for social users
             $table->string('role')->default('user'); // user | admin
             $table->integer('current_day')->default(1); // 1 to 60
             $table->integer('phase')->default(0); // 0 (Onboarding), 1 (Guided), 2 (Semi-Guided), 3 (Independent)

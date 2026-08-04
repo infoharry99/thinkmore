@@ -18,6 +18,9 @@ Route::prefix('v1')->group(function () {
     // Authentication Routes (Public)
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/social-login', [AuthController::class, 'socialLogin']);
+    Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
     // Authenticated App Routes (Sanctum Token Protected)
     Route::middleware('auth:sanctum')->group(function () {
