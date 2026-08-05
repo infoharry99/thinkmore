@@ -69,13 +69,15 @@ class CaseController extends Controller
     }
 
     /**
-     * Submit Day Reflection (Minimal retention rule: only 1-line internalize principle saved)
+     * Submit Day Reflection
+     * Supports optional 'increment_day' boolean parameter (defaults to false).
      */
     public function submitReflection(Request $request)
     {
         $validated = $request->validate([
             'case_id' => 'required|exists:cases,id',
             'internalize_text' => 'required|string|max:280',
+            'increment_day' => 'nullable|boolean',
         ]);
 
         $user = $request->user();
@@ -88,11 +90,49 @@ class CaseController extends Controller
             'submitted_at' => now(),
         ]);
 
-        // Increment user's day progress
+        // If explicitly requested, increment current_day
+        if (!empty($validated['increment_day']) && $validated['increment_day'] == true) {
+            $this->advanceUserDay($user);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Reflection recorded successfully.',
+            'data' => [
+                'reflection' => $reflection,
+                'current_day' => $user->current_day,
+                'phase' => $user->phase,
+            ]
+        ]);
+    }
+
+    /**
+     * Explicit API endpoint to advance student to the next day
+     */
+    public function incrementDay(Request $request)
+    {
+        $user = $request->user();
+
+        $this->advanceUserDay($user);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Student day advanced successfully.',
+            'data' => [
+                'current_day' => $user->current_day,
+                'phase' => $user->phase,
+            ]
+        ]);
+    }
+
+    /**
+     * Helper to advance user day & phase
+     */
+    private function advanceUserDay($user)
+    {
         if ($user->current_day < 60) {
             $user->increment('current_day');
-            
-            // Phase progression logic: Days 2-20 (Phase 1), Days 21-40 (Phase 2), Days 41-60 (Phase 3)
+
             if ($user->current_day >= 41) {
                 $user->update(['phase' => 3]);
             } elseif ($user->current_day >= 21) {
@@ -101,15 +141,5 @@ class CaseController extends Controller
                 $user->update(['phase' => 1]);
             }
         }
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Reflection recorded successfully.',
-            'data' => [
-                'reflection' => $reflection,
-                'next_day' => $user->current_day,
-                'phase' => $user->phase,
-            ]
-        ]);
     }
 }

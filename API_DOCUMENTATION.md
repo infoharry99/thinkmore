@@ -23,137 +23,74 @@ Authorization: Bearer <YOUR_ACCESS_TOKEN>
 ### 1.1 User Registration
 - **Endpoint**: `POST /register`
 - **Authentication**: None (Public)
-- **Description**: Registers a new student user and returns a Bearer access token.
-
-#### Request Body
-```json
-{
-  "name": "Arun Mishra",
-  "email": "arun@example.com",
-  "password": "password123"
-}
-```
 
 ---
 
 ### 1.2 User Login
 - **Endpoint**: `POST /login`
 - **Authentication**: None (Public)
-- **Description**: Authenticates an existing user and generates an access token.
-
-#### Request Body
-```json
-{
-  "email": "arun@example.com",
-  "password": "password123"
-}
-```
 
 ---
 
 ### 1.3 Social Login (Google & Apple Auth)
 - **Endpoint**: `POST /social-login`
 - **Authentication**: None (Public)
-- **Description**: Authenticates users signing in with Google or Apple. Creates a new account automatically if one doesn't exist, and returns a Bearer access token.
-
-#### Request Body
-```json
-{
-  "provider": "google",
-  "provider_id": "109876543210987654321",
-  "email": "social.user@gmail.com",
-  "name": "Social User"
-}
-```
-
-#### Field Specifications
-| Parameter | Type | Required | Values / Notes |
-| :--- | :--- | :--- | :--- |
-| `provider` | String | Yes | Must be `"google"` or `"apple"`. |
-| `provider_id` | String | Yes | OAuth User ID from Google/Apple SDK. |
-| `email` | String | Yes | User's verified email address. |
-| `name` | String | No | User's display name. |
-
-#### Success Response (`200 OK`)
-```json
-{
-  "status": "success",
-  "message": "Social login successful",
-  "data": {
-    "user": {
-      "id": 3,
-      "name": "Social User",
-      "email": "social.user@gmail.com",
-      "provider": "google",
-      "provider_id": "109876543210987654321",
-      "current_day": 1,
-      "phase": 0
-    },
-    "access_token": "3|aB9c...token_string...",
-    "token_type": "Bearer"
-  }
-}
-```
 
 ---
 
 ### 1.4 Forgot Password (Request 6-Digit OTP)
 - **Endpoint**: `POST /forgot-password`
 - **Authentication**: None (Public)
-- **Description**: Generates a 6-digit OTP code for password reset valid for 15 minutes.
-
-#### Request Body
-```json
-{
-  "email": "arun@example.com"
-}
-```
-
-#### Success Response (`200 OK`)
-```json
-{
-  "status": "success",
-  "message": "Password reset OTP has been sent to your email.",
-  "data": {
-    "email": "arun@example.com",
-    "otp_debug": "123456",
-    "expires_in_minutes": 15
-  }
-}
-```
 
 ---
 
 ### 1.5 Reset Password (Using OTP)
 - **Endpoint**: `POST /reset-password`
 - **Authentication**: None (Public)
-- **Description**: Resets user password using the 6-digit OTP code received in email.
+
+---
+
+## 2. Curriculum & Scenario Endpoints
+
+### 2.1 Get Today's Scenario (`GET /cases/today`)
+- **Endpoint**: `GET /cases/today`
+- **Authentication**: Bearer Token Required
+- **Description**: Returns the active scenario case matching the user's `current_day` (Day 1 through Day 60) along with all 6 framework steps, prompts, multiple-choice options, insights, tips, and model answers.
+
+---
+
+### 2.2 Submit Reflection (`POST /cases/submit-reflection`)
+- **Endpoint**: `POST /cases/submit-reflection`
+- **Authentication**: Bearer Token Required
+- **Description**: Saves the user's 1-line principle for the day. Supports an optional `increment_day` boolean parameter.
 
 #### Request Body
 ```json
 {
-  "email": "arun@example.com",
-  "otp": "123456",
-  "password": "newpassword123"
+  "case_id": 1,
+  "internalize_text": "A delayed reply is a fact. Being ignored is a story until evidence proves otherwise.",
+  "increment_day": false
 }
 ```
+
+---
+
+### 2.3 Explicit Increment / Next Day (`POST /cases/next-day` or `POST /cases/increment-day`)
+- **Endpoint**: `POST /cases/next-day`
+- **Authentication**: Bearer Token Required
+- **Description**: Explicitly advances the student to the next day (`current_day + 1`) and updates their phase.
+
+#### Request Body
+`{}` (Empty or optional parameters)
 
 #### Success Response (`200 OK`)
 ```json
 {
   "status": "success",
-  "message": "Password has been reset successfully. You can now log in with your new password."
+  "message": "Student day advanced successfully.",
+  "data": {
+    "current_day": 2,
+    "phase": 1
+  }
 }
 ```
-
----
-
-### 1.6 Get User Profile & Progress
-- **Endpoint**: `GET /user/profile`
-- **Authentication**: Bearer Token Required
-
----
-
-### 1.7 User Logout
-- **Endpoint**: `POST /logout`
-- **Authentication**: Bearer Token Required
