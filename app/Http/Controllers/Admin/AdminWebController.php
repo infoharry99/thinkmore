@@ -53,8 +53,13 @@ class AdminWebController extends Controller
 
     public function dashboard()
     {
+        // Query all non-admin users (including role='user', role=null, or social users)
+        $userQuery = function($q) {
+            $q->where('role', '!=', 'admin')->orWhereNull('role');
+        };
+
         $stats = [
-            'total_users' => User::where('role', 'user')->count(),
+            'total_users' => User::where($userQuery)->count(),
             'active_cases' => CaseStudy::where('is_active', true)->count(),
             'total_feedbacks' => FoundationFeedback::count(),
             'avg_impact_score' => round(FoundationFeedback::avg('judgment_impact_score') ?? 0, 1),
@@ -66,7 +71,7 @@ class AdminWebController extends Controller
             ->take(6)
             ->get();
 
-        $recentUsers = User::where('role', 'user')
+        $recentUsers = User::where($userQuery)
             ->latest()
             ->take(5)
             ->get();
@@ -183,7 +188,11 @@ class AdminWebController extends Controller
 
     public function usersIndex()
     {
-        $users = User::where('role', 'user')->latest()->paginate(15);
+        // Query all non-admin users (including role='user', role=null, or social users)
+        $users = User::where(function($q) {
+            $q->where('role', '!=', 'admin')->orWhereNull('role');
+        })->latest()->paginate(15);
+
         return view('admin.users.index', compact('users'));
     }
 }

@@ -5,7 +5,10 @@
 @section('content')
 <div class="card-box">
     <div class="card-header-flex">
-        <h3 style="font-size: 16px; font-weight: 700;">Registered Students</h3>
+        <div>
+            <h3 style="font-size: 18px; font-weight: 800;">Registered Students</h3>
+            <p style="font-size: 13px; color: #6B7280; margin-top: 2px;">All registered mobile application users, progress days, and login providers.</p>
+        </div>
     </div>
 
     <div class="table-responsive">
@@ -15,6 +18,7 @@
                     <th>User ID</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Auth Provider</th>
                     <th>Current Day</th>
                     <th>Current Phase</th>
                     <th>Joined Date</th>
@@ -23,11 +27,20 @@
             <tbody>
                 @forelse($users as $u)
                 <tr>
-                    <td>#{{ $u->id }}</td>
+                    <td><strong>#{{ $u->id }}</strong></td>
                     <td><strong>{{ $u->name }}</strong></td>
                     <td>{{ $u->email }}</td>
                     <td>
-                        <span class="badge badge-green">Day {{ $u->current_day }} / 60</span>
+                        @if($u->provider === 'google')
+                            <span class="badge badge-gray" style="background: #E0F2FE; color: #0369A1;"><i class="bi bi-google"></i> Google</span>
+                        @elseif($u->provider === 'apple')
+                            <span class="badge badge-gray" style="background: #F3F4F6; color: #111827;"><i class="bi bi-apple"></i> Apple</span>
+                        @else
+                            <span class="badge badge-gray" style="background: #ECFDF5; color: #047857;"><i class="bi bi-envelope"></i> Email</span>
+                        @endif
+                    </td>
+                    <td>
+                        <span class="badge badge-green" style="font-size: 13px; font-weight: 700;">Day {{ $u->current_day }} / 60</span>
                     </td>
                     <td>
                         @if($u->phase == 0)
@@ -40,11 +53,11 @@
                             <span class="badge badge-green">Phase 3: Independent</span>
                         @endif
                     </td>
-                    <td style="color: #9CA3AF;">{{ $u->created_at ? $u->created_at->format('M d, Y') : '—' }}</td>
+                    <td style="color: #6B7280; font-size: 13px;">{{ $u->created_at ? $u->created_at->format('M d, Y • h:i A') : '—' }}</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" style="text-align: center; color: #9CA3AF; padding: 24px;">No registered students found.</td>
+                    <td colspan="7" style="text-align: center; color: #9CA3AF; padding: 24px;">No registered students found.</td>
                 </tr>
                 @endforelse
             </tbody>
