@@ -13,6 +13,9 @@ Route::get('/', function () {
     return redirect()->route('admin.login');
 });
 
+// Alias 'login' route to admin.login for Laravel default auth middleware
+Route::get('/login', [AdminWebController::class, 'showLoginForm'])->name('login');
+
 // Admin Auth Routes (Guest)
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminWebController::class, 'showLoginForm'])->name('admin.login');
