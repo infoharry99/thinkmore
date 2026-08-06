@@ -7,8 +7,8 @@
     <!-- Top Action Header -->
     <div class="card-header-flex" style="margin-bottom: 20px;">
         <div>
-            <h3 style="font-size: 20px; font-weight: 800; color: #111827;">ThinkClear Curriculum Library (Days 1–60)</h3>
-            <p style="font-size: 13px; color: #6B7280; margin-top: 2px;">Search, filter, edit, and preview daily judgment scenarios and 6-step framework copy.</p>
+            <h3 style="font-size: 20px; font-weight: 800; color: #111827; margin: 0;">ThinkClear Curriculum Library (Days 1–60)</h3>
+            <p style="font-size: 13px; color: #6B7280; margin-top: 4px;">Search, filter, edit, and preview daily judgment scenarios and 6-step framework copy.</p>
         </div>
         <a href="{{ route('admin.cases.create') }}" class="btn-primary" style="padding: 10px 20px; font-weight: 700; border-radius: 10px;">
             <i class="bi bi-plus-circle"></i> Add New Day Case
@@ -23,7 +23,7 @@
             <div>
                 <label style="display: block; font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 4px; text-transform: uppercase;">Search Scenarios</label>
                 <div style="position: relative;">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by Day, ID, Trap, Skill, Domain, Scenario..." style="width: 100%; padding: 10px 12px 10px 36px; border-radius: 10px; border: 1px solid #CBD5E1; font-size: 13px;">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by Day, ID, Trap, Skill, Domain, Scenario..." class="form-control" style="padding-left: 36px; border-radius: 10px; font-size: 13px;">
                     <i class="bi bi-search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94A3B8;"></i>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <!-- Domain Filter Dropdown -->
             <div>
                 <label style="display: block; font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 4px; text-transform: uppercase;">Domain Category</label>
-                <select name="domain" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #CBD5E1; font-size: 13px; background: white;">
+                <select name="domain" class="form-select" style="border-radius: 10px; font-size: 13px;">
                     <option value="">All Domains</option>
                     @foreach($domains as $d)
                         <option value="{{ $d }}" {{ request('domain') === $d ? 'selected' : '' }}>{{ $d }}</option>
@@ -42,7 +42,7 @@
             <!-- Thinking Trap Filter Dropdown -->
             <div>
                 <label style="display: block; font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 4px; text-transform: uppercase;">Thinking Trap</label>
-                <select name="trap" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #CBD5E1; font-size: 13px; background: white;">
+                <select name="trap" class="form-select" style="border-radius: 10px; font-size: 13px;">
                     <option value="">All Traps</option>
                     @foreach($traps as $t)
                         <option value="{{ $t }}" {{ request('trap') === $t ? 'selected' : '' }}>{{ $t }}</option>
@@ -52,14 +52,14 @@
 
             <!-- Submit Button -->
             <div style="margin-top: 18px;">
-                <button type="submit" class="btn-primary" style="width: 100%; padding: 10px; font-size: 13px; font-weight: 700; border-radius: 10px; text-align: center;">
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 10px; font-size: 13px; font-weight: 700; border-radius: 10px; text-align: center; justify-content: center;">
                     <i class="bi bi-funnel-fill"></i> Filter
                 </button>
             </div>
 
             <!-- Reset Button -->
             <div style="margin-top: 18px;">
-                <a href="{{ route('admin.cases.index') }}" style="display: block; width: 100%; text-align: center; padding: 10px; border-radius: 10px; border: 1px solid #CBD5E1; color: #475569; font-size: 13px; font-weight: 700; text-decoration: none; background: white;">
+                <a href="{{ route('admin.cases.index') }}" style="display: flex; justify-content: center; align-items: center; width: 100%; text-align: center; padding: 10px; border-radius: 10px; border: 1px solid #CBD5E1; color: #475569; font-size: 13px; font-weight: 700; text-decoration: none; background: white;">
                     Reset
                 </a>
             </div>
@@ -78,8 +78,8 @@
 
     <!-- Table -->
     <div class="table-responsive">
-        <table>
-            <thead>
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
                 <tr>
                     <th>Day #</th>
                     <th>Case ID</th>
@@ -141,9 +141,9 @@
         </table>
     </div>
 
-    <!-- Clean Pagination Links -->
+    <!-- Clean Bootstrap 5 Pagination Links -->
     <div style="padding: 20px 4px 0 4px; display: flex; justify-content: flex-end;">
-        {{ $cases->links('pagination::bootstrap-4') }}
+        {{ $cases->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

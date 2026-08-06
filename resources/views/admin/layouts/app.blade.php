@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Dashboard') - ThinkClear</title>
+    
+    <!-- Google Fonts & Bootstrap 5 CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <style>
         :root {
             --brand-green: #1E6146;
@@ -20,8 +24,8 @@
             --border-color: #E5E7EB;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--body-bg); color: var(--text-dark); display: flex; min-height: 100vh; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--body-bg); color: var(--text-dark); display: flex; min-height: 100vh; margin: 0; padding: 0; }
 
         /* Sidebar Navigation */
         .sidebar { width: 260px; background: var(--sidebar-bg); color: #ffffff; flex-shrink: 0; display: flex; flex-direction: column; }
@@ -32,7 +36,7 @@
         .nav-item:hover, .nav-item.active { background: var(--brand-green); color: #ffffff; }
 
         /* Main Container */
-        .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow-x: hidden; }
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow-x: hidden; min-width: 0; }
         .topbar { height: 64px; background: #ffffff; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; }
         .user-info { display: flex; align-items: center; gap: 16px; font-size: 14px; font-weight: 600; }
         .btn-logout { background: none; border: none; color: #EF4444; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
@@ -49,40 +53,33 @@
         .card-box { background: #ffffff; border-radius: 16px; border: 1px solid var(--border-color); overflow: hidden; }
         .card-header-flex { padding: 20px 24px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; }
         .table-responsive { width: 100%; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
-        th { background: #FAFAFA; padding: 14px 20px; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border-color); }
-        td { padding: 16px 20px; border-bottom: 1px solid var(--border-color); }
 
-        .btn-primary { background: var(--brand-green); color: #ffffff; padding: 10px 18px; border-radius: 10px; text-decoration: none; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
-        .badge { padding: 4px 10px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+        .btn-primary { background: var(--brand-green) !important; color: #ffffff !important; padding: 10px 18px; border-radius: 10px; text-decoration: none; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
+        .badge { padding: 6px 12px; border-radius: 99px; font-size: 12px; font-weight: 600; }
         .badge-green { background: #E8F3EE; color: var(--brand-green); }
         .badge-gray { background: #F3F4F6; color: #4B5563; }
         
         .alert-success { background: #DEF7EC; color: #03543F; padding: 14px 20px; border-radius: 10px; margin-bottom: 24px; font-weight: 500; }
 
-        /* Laravel Pagination Styling Fix */
-        nav[role="navigation"] svg { display: none !important; width: 0 !important; height: 0 !important; }
-        nav[role="navigation"] { display: flex; flex-direction: column; gap: 12px; width: 100%; }
-        nav[role="navigation"] > div:first-child { display: none !important; }
-        nav[role="navigation"] > div:last-child { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        nav[role="navigation"] span.relative, nav[role="navigation"] a.relative {
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            padding: 8px 14px !important;
+        /* Bootstrap 5 Pagination Custom Styles */
+        .pagination { margin-bottom: 0 !important; }
+        .page-item .page-link {
+            color: #374151;
             border-radius: 8px !important;
-            font-size: 13px !important;
-            font-weight: 600 !important;
-            text-decoration: none !important;
-            color: #374151 !important;
-            border: 1px solid #D1D5DB !important;
-            background: #ffffff !important;
-            margin: 0 2px !important;
+            margin: 0 3px;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 8px 14px;
+            border: 1px solid #D1D5DB;
         }
-        nav[role="navigation"] span[aria-current="page"] span {
-            background: var(--brand-green) !important;
-            color: #ffffff !important;
+        .page-item.active .page-link {
+            background-color: var(--brand-green) !important;
             border-color: var(--brand-green) !important;
+            color: #ffffff !important;
+        }
+        .page-item.disabled .page-link {
+            color: #9CA3AF;
+            background-color: #F9FAFB;
         }
     </style>
 </head>
@@ -111,7 +108,7 @@
     <!-- Main Content Wrapper -->
     <div class="main-wrapper">
         <header class="topbar">
-            <h2>@yield('title', 'Dashboard')</h2>
+            <h2 style="font-size: 20px; font-weight: 800; margin: 0;">@yield('title', 'Dashboard')</h2>
             <div class="user-info">
                 <span><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</span>
                 <form action="{{ route('admin.logout') }}" method="POST" style="display:inline;">
@@ -131,5 +128,8 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
