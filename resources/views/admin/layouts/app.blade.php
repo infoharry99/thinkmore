@@ -59,6 +59,31 @@
         .badge-gray { background: #F3F4F6; color: #4B5563; }
         
         .alert-success { background: #DEF7EC; color: #03543F; padding: 14px 20px; border-radius: 10px; margin-bottom: 24px; font-weight: 500; }
+
+        /* Laravel Pagination Styling Fix */
+        nav[role="navigation"] svg { display: none !important; width: 0 !important; height: 0 !important; }
+        nav[role="navigation"] { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+        nav[role="navigation"] > div:first-child { display: none !important; }
+        nav[role="navigation"] > div:last-child { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        nav[role="navigation"] span.relative, nav[role="navigation"] a.relative {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 8px 14px !important;
+            border-radius: 8px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            color: #374151 !important;
+            border: 1px solid #D1D5DB !important;
+            background: #ffffff !important;
+            margin: 0 2px !important;
+        }
+        nav[role="navigation"] span[aria-current="page"] span {
+            background: var(--brand-green) !important;
+            color: #ffffff !important;
+            border-color: var(--brand-green) !important;
+        }
     </style>
 </head>
 <body>

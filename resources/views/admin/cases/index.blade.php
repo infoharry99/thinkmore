@@ -141,9 +141,9 @@
         </table>
     </div>
 
-    <!-- Pagination links maintaining query string -->
-    <div style="padding: 20px 4px 0 4px; display: flex; justify-content: space-between; align-items: center;">
-        {{ $cases->links() }}
+    <!-- Clean Pagination Links -->
+    <div style="padding: 20px 4px 0 4px; display: flex; justify-content: flex-end;">
+        {{ $cases->links('pagination::bootstrap-4') }}
     </div>
 </div>
 @endsection

@@ -3,8 +3,8 @@
 @section('title', 'Student Progress Tracker')
 
 @section('content')
-<div class="card-box">
-    <div class="card-header-flex">
+<div class="card-box" style="padding: 28px;">
+    <div class="card-header-flex" style="margin-bottom: 20px;">
         <div>
             <h3 style="font-size: 18px; font-weight: 800;">Registered Students</h3>
             <p style="font-size: 13px; color: #6B7280; margin-top: 2px;">All registered mobile application users, progress days, and login providers.</p>
@@ -64,8 +64,8 @@
         </table>
     </div>
 
-    <div style="padding: 16px 24px;">
-        {{ $users->links() }}
+    <div style="padding: 20px 4px 0 4px; display: flex; justify-content: flex-end;">
+        {{ $users->links('pagination::bootstrap-4') }}
     </div>
 </div>
 @endsection
