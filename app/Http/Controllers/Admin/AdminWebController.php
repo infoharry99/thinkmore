@@ -78,10 +78,42 @@ class AdminWebController extends Controller
         return view('admin.dashboard', compact('stats', 'recentFeedbacks', 'recentUsers'));
     }
 
-    public function casesIndex()
+    public function casesIndex(Request $request)
     {
-        $cases = CaseStudy::orderBy('day_number', 'asc')->paginate(20);
-        return view('admin.cases.index', compact('cases'));
+        $query = CaseStudy::orderBy('day_number', 'asc');
+
+        // General Search (Day, Case ID, Domain, Trap, Skill, Mission, Objective, Scenario)
+        if ($request->filled('search')) {
+            $search = trim($request->search);
+            $query->where(function($q) use ($search) {
+                $q->where('case_id', 'LIKE', "%{$search}%")
+                  ->orWhere('day_number', 'LIKE', "%{$search}%")
+                  ->orWhere('domain', 'LIKE', "%{$search}%")
+                  ->orWhere('primary_trap', 'LIKE', "%{$search}%")
+                  ->orWhere('primary_skill', 'LIKE', "%{$search}%")
+                  ->orWhere('mission', 'LIKE', "%{$search}%")
+                  ->orWhere('learning_objective', 'LIKE', "%{$search}%")
+                  ->orWhere('opening_scenario', 'LIKE', "%{$search}%");
+            });
+        }
+
+        // Domain Filter
+        if ($request->filled('domain')) {
+            $query->where('domain', $request->domain);
+        }
+
+        // Thinking Trap Filter
+        if ($request->filled('trap')) {
+            $query->where('primary_trap', $request->trap);
+        }
+
+        $cases = $query->paginate(15)->withQueryString();
+
+        // Get unique domains & traps for filter dropdowns
+        $domains = CaseStudy::distinct()->pluck('domain')->filter();
+        $traps = CaseStudy::distinct()->pluck('primary_trap')->filter();
+
+        return view('admin.cases.index', compact('cases', 'domains', 'traps'));
     }
 
     public function casesCreate()
