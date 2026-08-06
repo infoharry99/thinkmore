@@ -26,11 +26,12 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [AdminWebController::class, 'dashboard'])->name('admin.dashboard');
         
-        // Case Management CRUD
+        // Case Management CRUD & Interactive Mobile Preview
         Route::get('/cases', [AdminWebController::class, 'casesIndex'])->name('admin.cases.index');
         Route::get('/cases/create', [AdminWebController::class, 'casesCreate'])->name('admin.cases.create');
         Route::post('/cases', [AdminWebController::class, 'casesStore'])->name('admin.cases.store');
         Route::get('/cases/{id}/edit', [AdminWebController::class, 'casesEdit'])->name('admin.cases.edit');
+        Route::get('/cases/{id}/preview', [AdminWebController::class, 'casesPreview'])->name('admin.cases.preview');
         Route::put('/cases/{id}', [AdminWebController::class, 'casesUpdate'])->name('admin.cases.update');
 
         // Foundation Feedback Survey Reports (PDF 1)

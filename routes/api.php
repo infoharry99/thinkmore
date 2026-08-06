@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CaseController;
-use App\Http\Controllers\Api\FeedbackController;
+use App\Http\Controllers\Api\FoundationFeedbackController;
 use App\Http\Controllers\Api\AdminController;
 
 /*
@@ -36,7 +36,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/cases/next-day', [CaseController::class, 'incrementDay']); // Alias for next-day
 
         // Foundation Feedback Survey (60-Day PDF 1 Spec)
-        Route::post('/foundation-feedback', [FeedbackController::class, 'submitFeedback']);
+        Route::post('/foundation-feedback', [FoundationFeedbackController::class, 'submitFeedback']);
 
         // Mobile Admin Management (Optional)
         Route::middleware('admin')->prefix('admin')->group(function () {

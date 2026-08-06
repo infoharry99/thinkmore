@@ -53,7 +53,6 @@ class AdminWebController extends Controller
 
     public function dashboard()
     {
-        // Query all non-admin users (including role='user', role=null, or social users)
         $userQuery = function($q) {
             $q->where('role', '!=', 'admin')->orWhereNull('role');
         };
@@ -152,6 +151,12 @@ class AdminWebController extends Controller
         return view('admin.cases.edit', compact('case'));
     }
 
+    public function casesPreview($id)
+    {
+        $case = CaseStudy::findOrFail($id);
+        return view('admin.cases.preview', compact('case'));
+    }
+
     public function casesUpdate(Request $request, $id)
     {
         $case = CaseStudy::findOrFail($id);
@@ -188,7 +193,6 @@ class AdminWebController extends Controller
 
     public function usersIndex()
     {
-        // Query all non-admin users (including role='user', role=null, or social users)
         $users = User::where(function($q) {
             $q->where('role', '!=', 'admin')->orWhereNull('role');
         })->latest()->paginate(15);

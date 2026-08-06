@@ -26,7 +26,7 @@
                     <th>Mission / Objective</th>
                     <th>Scenario Preview</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <th style="min-width: 140px;">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,9 +56,14 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('admin.cases.edit', $c->id) }}" style="color: #1E6146; font-weight: 700; text-decoration: none;">
-                            <i class="bi bi-pencil-square"></i> Edit
-                        </a>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <a href="{{ route('admin.cases.preview', $c->id) }}" style="background: #E0F2FE; color: #0284C7; font-weight: 700; padding: 6px 12px; border-radius: 8px; font-size: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                                <i class="bi bi-eye-fill"></i> Preview
+                            </a>
+                            <a href="{{ route('admin.cases.edit', $c->id) }}" style="color: #1E6146; font-weight: 700; text-decoration: none; font-size: 13px;">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                        </div>
                     </td>
                 </tr>
                 @empty
