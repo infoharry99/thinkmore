@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'admin',
                 'current_day' => 60,
                 'phase' => 3,
+                'day0_completed' => true,
             ]
         );
 
@@ -33,12 +34,13 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password123'),
                 'role' => 'user',
                 'current_day' => 1,
-                'phase' => 0,
+                'phase' => 1,
+                'day0_completed' => true,
             ]
         );
 
         $this->call([
-            Day1To20CaseSeeder::class,
+            FoundationPhase1Seeder::class,
         ]);
     }
 }

@@ -1,0 +1,2870 @@
+[
+  {
+    "day": 1,
+    "phase": 1,
+    "title": "Read but No Reply",
+    "domain": "Relationships",
+    "mission": "Don't let your mind write the story before the facts.",
+    "learning_objective": "Separate Facts from Stories",
+    "difficulty": "Beginner",
+    "emotional_intensity": "Low",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Detect",
+    "primary_trap": "Mind Reading",
+    "secondary_trap": null,
+    "scenario_text": "Ananya sends her husband a message during lunch asking him to call when he is free.\nHe reads the message.\nThree hours pass.\nThere is still no reply.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "Your brain creates stories automatically.\nYour first responsibility is to separate them from facts.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story/assumptions your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: He read my message three hours ago and hasn't replied.\nStory/assumptions: He is upset with me and is ignoring me."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          },
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "emotional_reasoning",
+            "label": "Emotional Reasoning",
+            "definition": "Treating a feeling as proof of reality."
+          }
+        ],
+        "correct_option_key": "mind_reading",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Mind Reading.\nThe only confirmed fact is that there has been no reply.\nThe story is that he is upset and deliberately ignoring her.\nThere is no evidence to support that conclusion."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Ask \"What happened?\" before asking \"How are you feeling?\" or \"What's bothering you?\"",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If someone else described this situation, what would you tell them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one more explanation that also fits the facts?"
+          }
+        ],
+        "reference_example": [
+          "He got busy at work.",
+          "He planned to reply later and forgot.",
+          "He is driving.",
+          "His phone battery died."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Wait until the end of the workday.\nIf there is still no reply, send one calm message:\n\"Just checking if everything is okay. Call me when you're free.\""
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "A delayed reply is a fact. Being ignored is a story/assumptions until evidence proves otherwise."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else in my life might I be confusing facts with stories?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 2,
+    "phase": 1,
+    "title": "Let's Meet Tomorrow",
+    "domain": "Workplace",
+    "mission": "Don't predict the future without evidence.",
+    "learning_objective": "Recognize Thinking Traps",
+    "difficulty": "Beginner",
+    "emotional_intensity": "Low",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Decode",
+    "primary_trap": "Fortune Telling",
+    "secondary_trap": null,
+    "scenario_text": "At 8:15 PM, your manager sends you a message:\n\"Let's meet tomorrow morning.\"\nThere is no agenda.\nNo explanation.\nNo follow-up message.\nYou spend the rest of the evening wondering what the meeting is about.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "Your mind naturally tries to predict what happens next.\nPredictions are not facts.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: My manager asked to meet me tomorrow morning.\nStory: I'm probably in trouble or about to receive negative feedback."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          },
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          }
+        ],
+        "correct_option_key": "fortune_telling",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Fortune Telling.\nNothing has happened yet.\nYour mind has filled in the missing information by predicting an outcome without evidence."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Ask \"What happened?\" before asking \"How are you feeling?\" or \"What's bothering you?\"",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If someone else described this situation, what would you tell them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one positive possibility that also fits the facts?"
+          }
+        ],
+        "reference_example": [
+          "The manager wants to discuss a new project.",
+          "The meeting is part of a routine review.",
+          "The manager needs your input on an upcoming task.",
+          "The manager prefers discussing something in person rather than over messages."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Avoid jumping to conclusions.\nPrepare for the meeting as you normally would and wait until you have more information before interpreting the situation."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "An uncertain future is not evidence. Predictions should never be treated as facts."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else today might I be predicting an outcome without enough evidence?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 3,
+    "phase": 1,
+    "title": "The Different Tone",
+    "domain": "Family",
+    "mission": "Feelings are real. Conclusions need evidence.",
+    "learning_objective": "Test Assumptions with Evidence",
+    "difficulty": "Beginner",
+    "emotional_intensity": "Low",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Reality Check",
+    "primary_trap": "Emotional Reasoning",
+    "secondary_trap": null,
+    "scenario_text": "During dinner, your father answers your question with just one word.\nHe doesn't smile.\nHe quietly continues eating.\nThe rest of the family continues talking normally.\nYou suddenly feel that he is upset with you.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "Your feelings may be genuine.\nBut feelings are not evidence.\nAlways separate what happened from what you believe it means.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: My father answered briefly during dinner and didn't smile.\nStory: He must be angry with me."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "emotional_reasoning",
+            "label": "Emotional Reasoning",
+            "definition": "Treating a feeling as proof of reality."
+          },
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          }
+        ],
+        "correct_option_key": "emotional_reasoning",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Emotional Reasoning.\nFeeling worried doesn't automatically mean something is wrong.\nThe feeling is real.\nThe conclusion still needs evidence."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Ask \"What happened?\" before asking \"How are you feeling?\" or \"What's bothering you?\"",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If someone else described this situation, what would you tell them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that has nothing to do with you?"
+          }
+        ],
+        "reference_example": [
+          "He had a tiring day.",
+          "He is thinking about something unrelated.",
+          "He isn't feeling physically well.",
+          "He simply isn't in the mood to talk much today."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Rather than assuming something is wrong, wait for an appropriate moment and calmly ask:\n\"You seemed quieter than usual today. Is everything okay?\"\nThen listen without assuming the answer."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "Feeling worried doesn't prove that something is wrong. Feelings deserve attention, but conclusions require evidence."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else in my life have I mistaken a feeling for a fact?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 4,
+    "phase": 1,
+    "title": "The Internet Diagnosis",
+    "domain": "Health",
+    "mission": "One possibility is not the only possibility.",
+    "learning_objective": "Generate Alternative Explanations",
+    "difficulty": "Beginner",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Reframe",
+    "primary_trap": "Catastrophizing",
+    "secondary_trap": null,
+    "scenario_text": "You notice a small lump on your neck.\nIt isn't painful.\nYou search your symptoms online.\nBy the time you stop reading, you're convinced something is seriously wrong.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "When information is incomplete, your brain often fills the gaps with the worst possible explanation.\nThat doesn't make it true.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: I noticed a small lump on my neck and searched for it online.\nStory: I probably have a serious illness."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          },
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          },
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          }
+        ],
+        "correct_option_key": "catastrophizing",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Catastrophizing.\nFinding one possible explanation online doesn't mean it is the correct explanation.\nYour mind has immediately jumped to the worst-case scenario without sufficient evidence."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Ask \"What happened?\" before asking \"What could happen?\"",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If someone else described this situation, what would you tell them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that is less serious than your first thought?"
+          }
+        ],
+        "reference_example": [
+          "It could be a swollen lymph node caused by a minor infection.",
+          "It could be a harmless cyst.",
+          "It could be temporary and disappear in a few days.",
+          "A healthcare professional can assess it properly."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Instead of assuming the worst, make an appointment with a qualified healthcare professional and avoid drawing conclusions based only on internet searches."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "The worst possible explanation is only one possibility—not a conclusion."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else in my life have I assumed the worst before gathering enough evidence?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 5,
+    "phase": 1,
+    "title": "The Promotion Announcement",
+    "domain": "Career",
+    "mission": "Don't look only for evidence that supports your belief.",
+    "learning_objective": "Choose Thoughtful Actions",
+    "difficulty": "Beginner",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Intervention",
+    "primary_trap": "Confirmation Bias",
+    "secondary_trap": null,
+    "scenario_text": "Your manager announces that a colleague has been promoted.\nYou had also applied for the same position.\nAs the day goes on, you begin replaying past conversations with your manager.\nYou start remembering only the moments that make you feel you were overlooked.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "Once your brain believes a story, it naturally starts collecting evidence to support it.\nThat doesn't mean the story is true.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: A colleague received the promotion.\nStory: My manager values my colleague more and doesn't see my potential."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          },
+          {
+            "key": "all_or_nothing",
+            "label": "All-or-Nothing Thinking",
+            "definition": "Treating a minor gap as total failure."
+          }
+        ],
+        "correct_option_key": "confirmation_bias",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Confirmation Bias.\nInstead of considering all the available information, your mind has started collecting only the memories that support your belief that you were unfairly treated.\nEvidence that doesn't fit the story is often ignored."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Ask yourself, \"What evidence am I ignoring?\" before deciding you're right.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence might contradict your assumption?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If someone else described this situation, what would you tell them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that doesn't support your current belief?"
+          }
+        ],
+        "reference_example": [
+          "The promoted colleague may have had additional experience.",
+          "The decision may have been based on skills needed for that specific role.",
+          "Your manager may value your work but believe you need more experience before the next step.",
+          "There may have been selection criteria you were unaware of."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Instead of assuming the reason, schedule a meeting with your manager and ask for constructive feedback.\nFocus on understanding what skills or experience would strengthen your chances in the future."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "Looking for evidence that supports my belief is easy. Looking for evidence that challenges it requires judgment."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else in my life might I be noticing only the evidence that supports what I already believe?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 6,
+    "phase": 1,
+    "title": "The School Complaint",
+    "domain": "Parenting",
+    "mission": "Learn from the situation. Don't live inside it.",
+    "learning_objective": "Internalize the Thinking Process",
+    "difficulty": "Beginner",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Internalize",
+    "primary_trap": "Rumination",
+    "secondary_trap": null,
+    "scenario_text": "Your child comes home with a note from school.\nIt says they were talking during class despite repeated warnings.\nThat evening, you keep replaying the incident in your mind.\nYou begin wondering if you're a bad parent and whether your child is developing behavioural problems.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "One event can stay in your mind long after it has happened.\nThinking about it repeatedly doesn't always lead to better understanding.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: The school informed me that my child was talking during class after repeated warnings.\nStory: I'm failing as a parent, and my child is becoming difficult to manage."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "rumination",
+            "label": "Rumination",
+            "definition": "Repetitive, circular overthinking of past events."
+          },
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          },
+          {
+            "key": "all_or_nothing",
+            "label": "All-or-Nothing Thinking",
+            "definition": "Treating a minor gap as total failure."
+          }
+        ],
+        "correct_option_key": "rumination",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Rumination.\nYour mind keeps replaying the same event without discovering new information or moving towards a solution.\nThinking more isn't always thinking better."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Ask yourself, \"Am I solving the problem, or simply replaying it?\"",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If someone else described this situation, what would you tell them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that doesn't blame you or your child?"
+          }
+        ],
+        "reference_example": [
+          "Children sometimes test boundaries at school.",
+          "One incident doesn't describe my child's overall behaviour.",
+          "The teacher may be informing me early so we can work together.",
+          "This could be an opportunity to understand what happened before reacting."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Speak calmly with your child to understand what happened.\nIf needed, discuss the situation with the teacher before drawing conclusions.\nFocus on understanding first, then deciding what action is appropriate."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "Replaying the same event doesn't always produce new answers. Judgment improves when I move from overthinking to understanding."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "What situation have I been replaying without gaining any new understanding?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 7,
+    "phase": 1,
+    "title": "The Silent Client",
+    "domain": "Business",
+    "mission": "Separate observations from interpretations.",
+    "learning_objective": "Separate Facts from Stories",
+    "difficulty": "Beginner-Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Detect",
+    "primary_trap": "Mind Reading",
+    "secondary_trap": null,
+    "scenario_text": "You sent a business proposal to an important client.\nThey usually respond within one or two days.\nFour days have passed.\nThey have viewed your message but haven't replied.\nYou begin wondering whether you've lost the client.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "When information is missing, your brain often creates a story to fill the gap.\nThe story may feel convincing, but it still needs evidence.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: The client viewed my proposal four days ago and hasn't replied.\nStory: The client didn't like my proposal and has decided not to work with me."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          },
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          }
+        ],
+        "correct_option_key": "mind_reading",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Mind Reading.\nThe only confirmed fact is that the client hasn't replied.\nEverything else is an interpretation.\nWithout evidence, assuming the client's intentions can lead to unnecessary stress or poor decisions."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Ask yourself, \"What do I know?\" before asking, \"What does it mean?\"",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If someone else described this situation, what would you tell them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that has nothing to do with the quality of your proposal?"
+          }
+        ],
+        "reference_example": [
+          "The client is reviewing the proposal internally.",
+          "They are waiting for approval from another decision-maker.",
+          "They became busy with other priorities.",
+          "They intend to reply but haven't had the opportunity yet."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Send a polite follow-up message after a reasonable interval.\nFor example:\n\"Hello, just checking whether you've had a chance to review the proposal. Please let me know if you have any questions or need additional information.\"\nThen allow the client time to respond."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "Silence is a fact. The meaning I attach to that silence is a story until evidence proves otherwise."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else today have I assumed someone's intention without actually knowing it?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 8,
+    "phase": 1,
+    "title": "The First Offer",
+    "domain": "Finance",
+    "mission": "Don't let someone else's opinion become your only measure of your worth.",
+    "learning_objective": "Recognize Thinking Traps",
+    "difficulty": "Beginner-Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Decode",
+    "primary_trap": "Validation Seeking",
+    "secondary_trap": null,
+    "scenario_text": "After several interview rounds, you finally receive a job offer.\nThe salary offered is lower than you expected.\nBefore reviewing the complete role or responsibilities, you immediately begin wondering:\n\"Maybe this is all I'm worth.\"",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "One person's opinion or one offer doesn't define your value.\nIt is only one piece of information.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: I received a job offer with a lower salary than I expected.\nStory: The company thinks I'm not valuable enough."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "validation_seeking",
+            "label": "Validation Seeking",
+            "definition": "Heavy reliance on immediate external acknowledgment."
+          },
+          {
+            "key": "all_or_nothing",
+            "label": "All-or-Nothing Thinking",
+            "definition": "Treating a minor gap as total failure."
+          },
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          }
+        ],
+        "correct_option_key": "validation_seeking",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Validation Seeking.\nInstead of viewing the offer as one negotiation point, your mind has started using it as proof of your personal worth.\nExternal feedback is information.\nIt isn't your identity."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Feedback informs you. It doesn't define you.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If someone else described this situation, what would you tell them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that has nothing to do with your abilities?"
+          }
+        ],
+        "reference_example": [
+          "The company may have salary bands for the role.",
+          "The offer may simply be their opening position.",
+          "There may be room for negotiation.",
+          "Budget constraints may influence the offer."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Review the complete offer objectively.\nResearch market salaries.\nIf appropriate, negotiate respectfully based on your experience and the value you bring rather than reacting emotionally to the first number."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "External feedback provides information. It does not determine my worth."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else have I allowed someone else's opinion to define how I see myself?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 9,
+    "phase": 1,
+    "title": "Left Out of the Meeting",
+    "domain": "Workplace",
+    "mission": "Verify before you conclude.",
+    "learning_objective": "Test Assumptions with Evidence",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Reality Check",
+    "primary_trap": "Confirmation Bias",
+    "secondary_trap": null,
+    "scenario_text": "You arrive at work and notice that several colleagues are discussing a meeting that happened yesterday.\nYou weren't invited.\nNo one has spoken to you about it.\nYou immediately begin wondering whether you are being excluded from important decisions.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "When information is incomplete, your brain quickly tries to explain why.\nAn explanation isn't the same as evidence.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: A meeting took place yesterday, and I wasn't present.\nStory: I'm being excluded because my manager no longer values my contribution."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          },
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          }
+        ],
+        "correct_option_key": "confirmation_bias",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Confirmation Bias.\nOnce you believe you're being excluded, your mind starts looking for evidence that supports that belief.\nAt the same time, it ignores other possible explanations."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Missing information is not evidence. Gather facts before filling the gaps.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. What information is still missing before you can reach a conclusion?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that doesn't involve anyone intentionally excluding you?"
+          }
+        ],
+        "reference_example": [
+          "The meeting involved a project you aren't currently assigned to.",
+          "It was arranged at short notice.",
+          "Someone assumed another colleague had already informed you.",
+          "A follow-up discussion may still be planned."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Rather than assuming the reason, ask your manager or a colleague:\n\"I heard there was a meeting yesterday. Could you help me understand what it was about and whether there's anything I should know?\"\nSeek information before interpreting the situation."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "When information is missing, my first responsibility is to gather facts—not create explanations."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else have I filled gaps in information with my own explanation instead of asking for facts?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 10,
+    "phase": 1,
+    "title": "Cancelled Dinner",
+    "domain": "Relationships",
+    "mission": "One event can have many explanations.",
+    "learning_objective": "Generate Alternative Explanations",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Reframe",
+    "primary_trap": "Fortune Telling",
+    "secondary_trap": null,
+    "scenario_text": "You and your partner planned to have dinner together after work.\nAn hour before meeting, they send a message:\n\"I'm really sorry. Can we do this another day?\"\nNo explanation is given.\nYou immediately begin thinking that something is wrong with the relationship.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "A cancelled plan is a fact.\nThe meaning you attach to it is an interpretation.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: My partner cancelled our dinner plans and asked to meet another day.\nStory: Our relationship is changing, and they don't want to spend time with me anymore."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          },
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          }
+        ],
+        "correct_option_key": "fortune_telling",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Fortune Telling.\nYour mind has taken one cancelled plan and predicted what it believes will happen next.\nNothing in the situation confirms that prediction."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Don't confuse today's event with tomorrow's prediction.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If this happened to a close friend, what advice would you give them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that assumes good intent instead of bad intent?"
+          }
+        ],
+        "reference_example": [
+          "Something urgent came up at work.",
+          "They aren't feeling well.",
+          "A family responsibility unexpectedly arose.",
+          "They genuinely want to meet another day when they can give you their full attention."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Reply calmly and acknowledge the change of plans.\nFor example:\n\"No problem. Let me know when you're free, and we'll plan another day.\"\nIf the pattern continues repeatedly over time, then gather more information before reaching a conclusion."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "One cancelled plan does not predict the future of a relationship."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else have I treated one event as proof of what will happen next?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 11,
+    "phase": 1,
+    "title": "Should I Continue?",
+    "domain": "Career",
+    "mission": "Past investment should not decide future decisions.",
+    "learning_objective": "Choose Thoughtful Actions",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Intervention",
+    "primary_trap": "Sunk Cost Fallacy",
+    "secondary_trap": null,
+    "scenario_text": "Six months ago, you enrolled in a professional certification course.\nYou've attended only a few sessions.\nYou no longer enjoy the course and don't see yourself using the qualification in the future.\nHowever, every time you think about stopping, you remind yourself how much time and money you've already invested.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "Past investments cannot be recovered.\nGood judgment is about deciding what makes the most sense from today onward.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: I enrolled in the course six months ago.\nStory: I'm no longer interested in completing it."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "sunk_cost",
+            "label": "Sunk Cost Fallacy",
+            "definition": "Continuing a course of action because of past investment rather than future value."
+          },
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          },
+          {
+            "key": "rumination",
+            "label": "Rumination",
+            "definition": "Repetitive, circular overthinking of past events."
+          }
+        ],
+        "correct_option_key": "sunk_cost",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Sunk Cost Fallacy.\nThe decision is being influenced by what you've already invested rather than by whether continuing still makes sense.\nPast investment is real.\nIt shouldn't automatically determine future action."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Ask yourself, \"Am I deciding based on the future or trying to justify the past?\"",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. If you had not already invested the time and money, would you still choose this course today?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence suggests continuing is the best option?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. What evidence suggests changing direction might be reasonable?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one benefit of changing direction instead of continuing automatically?"
+          }
+        ],
+        "reference_example": [
+          "The knowledge I've already gained still has value.",
+          "Stopping now doesn't erase what I've learned.",
+          "My interests and goals may have changed.",
+          "It's reasonable to redirect my time toward something that better fits my future."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Review your current career goals.\nIf the course still supports those goals, complete it with intention.\nIf it no longer aligns, make a deliberate decision rather than continuing only because you've already invested time and money."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "Past investment deserves respect, but future decisions should be guided by future value."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "What decision in my life am I continuing mainly because of what I've already invested?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 12,
+    "phase": 1,
+    "title": "The Forgotten Birthday",
+    "domain": "Family",
+    "mission": "One mistake doesn't define the whole story.",
+    "learning_objective": "Internalize the Thinking Process",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Internalize",
+    "primary_trap": "All-or-Nothing Thinking",
+    "secondary_trap": null,
+    "scenario_text": "Your brother forgets your birthday.\nHe doesn't call.\nHe doesn't send a message.\nBy the end of the day, you begin thinking:\n\"He doesn't care about me anymore.\"",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "One event may be disappointing.\nThat doesn't automatically describe the entire relationship.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: My brother didn't wish me on my birthday.\nStory: He doesn't care about me anymore."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "all_or_nothing",
+            "label": "All-or-Nothing Thinking",
+            "definition": "Treating a minor gap as total failure."
+          },
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "emotional_reasoning",
+            "label": "Emotional Reasoning",
+            "definition": "Treating a feeling as proof of reality."
+          }
+        ],
+        "correct_option_key": "all_or_nothing",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why All-or-Nothing Thinking.\nYour mind has taken one disappointing event and used it to make a sweeping conclusion about the entire relationship.\nOne event rarely tells the complete story."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Don't let one moment define the whole relationship.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. Does this one event represent the entire relationship?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence suggests your relationship has been positive at other times?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. If someone else described this situation, what would you tell them?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one memory that contradicts your current conclusion?"
+          }
+        ],
+        "reference_example": [
+          "He genuinely forgot the date.",
+          "He has been unusually busy.",
+          "Something unexpected may have happened that day.",
+          "He may realize later and apologize."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Rather than assuming the relationship has changed, speak with your brother when the opportunity arises.\nIf it continues to bother you, express how you felt without making assumptions about his intentions.\nFor example:\n\"I missed hearing from you on my birthday. I just wanted to check if everything is okay.\""
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "One disappointing moment does not define an entire relationship. Judgment requires seeing the bigger picture."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else have I allowed one event to shape my opinion of an entire person or situation?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 13,
+    "phase": 1,
+    "title": "Waiting for the Test Report",
+    "domain": "Health",
+    "mission": "A feeling is a signal, not a conclusion.",
+    "learning_objective": "Separate Facts from Stories",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Detect (Third Learning Cycle)",
+    "primary_trap": "Emotional Reasoning",
+    "secondary_trap": "Catastrophizing",
+    "scenario_text": "Your doctor advises you to undergo a routine blood test.\nThe report will be available in two days.\nOn your way home, you begin feeling anxious.\nBy evening, you find yourself thinking:\n\"If I'm this worried, something must be seriously wrong.\"",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "Your emotions provide information about how you feel.\nThey do not provide evidence about what is true.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: My doctor advised a blood test, and the report will be ready in two days.\nStory: Because I feel anxious, the report will probably show something serious."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "emotional_reasoning",
+            "label": "Emotional Reasoning",
+            "definition": "Treating a feeling as proof of reality."
+          },
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          },
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          }
+        ],
+        "correct_option_key": "emotional_reasoning",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Emotional Reasoning.\nFeeling anxious while waiting is understandable.\nThe mistake happens when anxiety becomes proof that something bad has happened.\nYour feeling is real.\nYour conclusion still requires evidence."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Feeling uncertain is normal. Treating uncertainty as evidence is the trap.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you feeling right now?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. Are your feelings the same as evidence?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence do you actually have today?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. What information are you still waiting for?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that is based on facts rather than feelings?"
+          }
+        ],
+        "reference_example": [
+          "Routine blood tests are commonly recommended.",
+          "The doctor may simply be gathering more information.",
+          "Most test results do not indicate serious illness.",
+          "Waiting for results naturally creates uncertainty."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Wait for the test results before reaching any conclusions.\nContinue your normal plans in the meantime — a feeling is not a result, and only the result should change your decision."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "Feeling anxious doesn't tell me what the result will be. Feelings deserve attention, but evidence deserves my decisions."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "When was the last time I treated a feeling as if it were evidence?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 14,
+    "phase": 1,
+    "title": "No Interview Feedback",
+    "domain": "Career",
+    "mission": "Predictions are not evidence.",
+    "learning_objective": "Recognize Thinking Traps",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Decode (Third Learning Cycle)",
+    "primary_trap": "Fortune Telling",
+    "secondary_trap": null,
+    "scenario_text": "You attend a job interview that goes well.\nThe interviewer tells you they'll get back to you within five working days.\nSeven days pass.\nYou haven't received any email or phone call.\nYou begin thinking:\n\"I didn't get the job.\"",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "When answers are delayed, your mind often creates one.\nA prediction may feel convincing, but it isn't evidence.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: It's been seven days since my interview, and I haven't received any update.\nStory: I wasn't selected for the role."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          },
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          },
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          }
+        ],
+        "correct_option_key": "fortune_telling",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Fortune Telling.\nNo decision has been communicated.\nYour mind has filled the silence with a prediction and accepted it as fact."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "A delay is information. It is not a decision.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. What other explanations could account for the delay?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that has nothing to do with your interview performance?"
+          }
+        ],
+        "reference_example": [
+          "The hiring team is interviewing other candidates.",
+          "The hiring manager is unavailable.",
+          "Internal approvals are taking longer than expected.",
+          "The recruitment process has been delayed."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Wait a reasonable amount of time and send a polite follow-up email.\nFor example:\n\"I hope you're doing well. I wanted to follow up regarding my interview and check if there are any updates. Thank you for your time and consideration.\"\nContinue applying for other opportunities instead of waiting for one outcome."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "A delayed response is not the same as a negative response. Predictions should never replace evidence."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else have I mistaken uncertainty for certainty?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 15,
+    "phase": 1,
+    "title": "The Closed Door",
+    "domain": "Parenting",
+    "mission": "Don't assume you know the reason.",
+    "learning_objective": "Test Assumptions with Evidence",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Reality Check (Third Learning Cycle)",
+    "primary_trap": "Mind Reading",
+    "secondary_trap": "Emotional Reasoning (possible)",
+    "scenario_text": "Over the past week, your teenage son has been spending more time alone in his room.\nHe closes the door after returning from school.\nHe joins the family for meals but speaks very little.\nYou begin thinking:\n\"He doesn't want to talk to me anymore.\"",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "A behaviour is something you observe.\nThe reason behind that behaviour is often a story your mind creates.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: My son has been spending more time in his room and speaking less than usual.\nStory: He is upset with me and no longer wants to talk to me."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "emotional_reasoning",
+            "label": "Emotional Reasoning",
+            "definition": "Treating a feeling as proof of reality."
+          },
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          }
+        ],
+        "correct_option_key": "mind_reading",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Mind Reading.\nThe behaviour is visible.\nThe intention behind the behaviour is unknown.\nWithout evidence, assuming you know what someone else is thinking can lead to misunderstandings."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Understanding begins with curiosity, not assumptions.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence contradicts it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. Have you asked your child what is happening, or are you assuming you already know?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that has nothing to do with your relationship?"
+          }
+        ],
+        "reference_example": [
+          "He may be tired after school.",
+          "He may be dealing with academic pressure.",
+          "He may simply want some personal space.",
+          "Something at school may be bothering him.",
+          "This could be a temporary phase."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Choose a calm moment to talk.\nInstead of asking,\n\"Why are you avoiding me?\"\nTry asking,\n\"I've noticed you've been spending more time in your room lately. Is everything okay?\"\nListen first.\nInterpret later."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "Observing someone's behaviour is different from knowing the reason behind it. Understanding begins by asking, not assuming."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else in my life have I assumed someone's intention without first asking them?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 16,
+    "phase": 1,
+    "title": "Falling Sales",
+    "domain": "Business",
+    "mission": "Don't let one explanation become the only explanation.",
+    "learning_objective": "Generate Alternative Explanations",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Reframe (Third Learning Cycle)",
+    "primary_trap": "Confirmation Bias",
+    "secondary_trap": "Catastrophizing (possible)",
+    "scenario_text": "You own a small business.\nSales have declined for the past two months.\nA friend tells you,\n\"Customers don't like your product anymore.\"\nFor the rest of the day, you begin noticing only things that seem to support that conclusion.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "When your mind accepts one explanation, it naturally starts searching for evidence that supports it.\nThat doesn't mean it's the correct explanation.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: Sales have declined for the past two months.\nStory: Customers no longer like my product, and my business is failing."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          },
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          },
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          }
+        ],
+        "correct_option_key": "confirmation_bias",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Confirmation Bias.\nOnce you accepted the idea that customers no longer liked your product, your attention shifted toward information that supported that belief.\nAt the same time, you stopped looking for alternative explanations."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Strong judgments are built on complete evidence—not selective evidence.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your assumption?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence challenges your assumption?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. What information do you still need before deciding why sales have fallen?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that has nothing to do with the quality of your product?"
+          }
+        ],
+        "reference_example": [
+          "Demand may be lower because of seasonal changes.",
+          "A new competitor may have entered the market.",
+          "Customers may not know about recent improvements to the product.",
+          "Marketing activity may have decreased.",
+          "Economic conditions may have affected customer spending."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Instead of immediately changing the product, gather more information.\nReview sales data, speak with customers, compare previous months, and identify patterns before deciding what action to take."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "The first explanation that comes to mind isn't always the correct one. Good judgment requires looking for evidence that both supports and challenges my conclusion."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where else in my life have I accepted one explanation without looking for alternatives?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 17,
+    "phase": 1,
+    "title": "Walk Away or Continue?",
+    "domain": "Negotiation",
+    "mission": "Know when persistence becomes attachment.",
+    "learning_objective": "Choose Thoughtful Actions",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Intervention (Third Learning Cycle)",
+    "primary_trap": "Sunk Cost Fallacy",
+    "secondary_trap": "Confirmation Bias (possible)",
+    "scenario_text": "You've been negotiating a business partnership for the past six weeks.\nThere have been multiple meetings and countless phone calls.\nEvery discussion ends with new conditions being added.\nThe agreement still doesn't meet your original expectations.\nYou begin thinking:\n\"I've already invested so much time. I have to make this work.\"",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "Time already spent cannot be recovered.\nThe next decision should depend on what creates the most value going forward.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: I've spent six weeks negotiating, and the agreement still doesn't meet my expectations.\nStory: I can't walk away now because all that effort will be wasted."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "sunk_cost",
+            "label": "Sunk Cost Fallacy",
+            "definition": "Continuing a course of action because of past investment rather than future value."
+          },
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          },
+          {
+            "key": "validation_seeking",
+            "label": "Validation Seeking",
+            "definition": "Heavy reliance on immediate external acknowledgment."
+          }
+        ],
+        "correct_option_key": "sunk_cost",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why Sunk Cost Fallacy.\nYour decision is becoming driven by the effort you've already invested rather than by whether the partnership still makes sense.\nPast effort is real.\nIt shouldn't automatically decide your future."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Ask yourself, \"Would I make the same decision if I were starting today?\"",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. If these negotiations started today, would you still pursue this opportunity?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What benefits still exist if you continue?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. What risks exist if you continue simply because you've already invested time?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one benefit of saying \"no\" instead of continuing?"
+          }
+        ],
+        "reference_example": [
+          "Walking away may create space for a better opportunity.",
+          "Continuing only makes sense if the future benefits justify it.",
+          "Renegotiating the terms may be a better option.",
+          "Time already invested is a learning experience, not a reason to continue."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Review the agreement against your original objectives.\nIf the revised terms no longer meet your goals, be prepared to respectfully end the negotiation rather than continuing simply because of the time already invested."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "Good judgment isn't about protecting past effort. It's about making the best decision with the information I have today."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "What am I continuing today mainly because of what I've already invested, rather than because it still makes sense?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 18,
+    "phase": 1,
+    "title": "Performance Feedback",
+    "domain": "Workplace",
+    "mission": "One piece of feedback doesn't define your ability.",
+    "learning_objective": "Internalize the Thinking Process",
+    "difficulty": "Intermediate",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "3-5",
+    "primary_skill": "Internalize (Third Learning Cycle)",
+    "primary_trap": "All-or-Nothing Thinking",
+    "secondary_trap": "Emotional Reasoning (possible)",
+    "scenario_text": "During your monthly review, your manager says:\n\"Overall, you've been doing good work. I'd like you to improve your presentation skills.\"\nYou leave the meeting thinking:\n\"I'm not good at my job.\"",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "Feedback about one skill is not the same as feedback about your entire ability.\nYour brain often generalizes from one point to the whole picture.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: My manager appreciated my overall work and suggested improving my presentation skills.\nStory: I'm performing poorly and I'm not good enough."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "all_or_nothing",
+            "label": "All-or-Nothing Thinking",
+            "definition": "Treating a minor gap as total failure."
+          },
+          {
+            "key": "emotional_reasoning",
+            "label": "Emotional Reasoning",
+            "definition": "Treating a feeling as proof of reality."
+          },
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          }
+        ],
+        "correct_option_key": "all_or_nothing",
+        "explanation_reveal": "after_selection",
+        "explanation": "Why All-or-Nothing Thinking.\nYour manager commented on one area for improvement.\nYour mind converted that into a judgment about your entire performance.\nOne weakness does not erase many strengths."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Growth begins when feedback becomes information instead of identity.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What fact do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What are you assuming?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What positive feedback did you receive?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence suggests you are doing well in other areas?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. Does one improvement area define your overall performance?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one strength your manager has appreciated in the past?"
+          }
+        ],
+        "reference_example": [
+          "My manager believes I can improve.",
+          "One development area doesn't cancel my strengths.",
+          "Feedback is intended to help me grow.",
+          "Every professional has skills they continue to develop."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Thank your manager for the feedback.\nAsk for specific suggestions or opportunities to improve your presentation skills.\nTreat the feedback as a development plan rather than a judgment about your worth."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "One area for improvement does not define my overall ability. Growth comes from improving the part—not condemning the whole."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Where in my life have I allowed one mistake or one piece of feedback to define my entire ability?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 19,
+    "phase": 1,
+    "title": "The Unexpected Restructure",
+    "domain": "Career",
+    "mission": "Good judgment begins by slowing down before reaching a conclusion.",
+    "learning_objective": "Apply the complete ThinkClear Framework",
+    "difficulty": "Intermediate-Advanced",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "5-6",
+    "primary_skill": "Guided Challenge",
+    "primary_trap": "Mixed Judgment Scenario",
+    "secondary_trap": null,
+    "scenario_text": "You've worked in your company for four years.\nOne morning, your manager sends an invitation titled:\n\"Team Meeting – Organizational Update\"\nLater that day, you notice HR meeting privately with several managers.\nTwo colleagues mention they've heard there may be restructuring.\nNo official announcement has been made.\nOn your way home, you begin thinking:\n\"I'm probably going to lose my job.\"",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": "Facts are observable.\nRumours, predictions and interpretations are not.\nAlways separate what you know from what you think might happen.",
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": "Fact: There is an organizational update meeting scheduled.\nStory: Some colleagues have heard rumours."
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap is most likely at work?",
+        "input_type": "single_choice",
+        "options": [
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          },
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          },
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          }
+        ],
+        "correct_option_key": null,
+        "explanation_reveal": "after_selection",
+        "explanation": "There isn't just one correct answer.\nThis situation contains multiple thinking traps.\nMany people begin with Fortune Telling.\nOthers immediately move to Catastrophizing.\nSome begin looking only for information that supports their fears (Confirmation Bias).\nThe important skill is recognising that your thinking—not the situation—is driving your conclusion."
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": "Rumours are not evidence. Wait for facts before reaching conclusions.",
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What facts do you actually know?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. Which parts of your thinking are assumptions?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports your conclusion?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence challenges it?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. What information is still missing?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 3 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 3
+          },
+          {
+            "field_key": "one_more_explanation",
+            "prompt": "Can you think of one explanation that you hadn't considered at first?"
+          }
+        ],
+        "reference_example": [
+          "The restructuring may affect reporting lines rather than jobs.",
+          "The meeting may involve expansion rather than downsizing.",
+          "HR may be preparing managers before communicating changes.",
+          "The rumours may be incomplete or inaccurate."
+        ]
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": "There isn't always a perfect action.\nThere is usually one reasonable action based on the evidence available.",
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is one thoughtful action you can take?"
+          }
+        ],
+        "reference_example": "Continue performing your responsibilities professionally.\nAttend the organizational meeting with an open mind.\nWait for official communication before making decisions or reacting to rumours."
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": "When uncertainty increases, good judgment becomes even more important. My first thought isn't always my best thought."
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Which part of today's situation was fact, and which part came from your own interpretation?",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    }
+  },
+  {
+    "day": 20,
+    "phase": 1,
+    "title": "The Unexpected Email",
+    "domain": "Workplace",
+    "mission": "Trust the process you've been practising.",
+    "learning_objective": "Apply the complete ThinkClear Framework independently.",
+    "difficulty": "Checkpoint (Advanced)",
+    "emotional_intensity": "Moderate",
+    "estimated_minutes": "5-6",
+    "primary_skill": "Internalize (Independent Application)",
+    "primary_trap": "Not revealed upfront — independent checkpoint",
+    "secondary_trap": null,
+    "scenario_text": "You receive an email from your manager with the subject line:\n\"Please see me before you leave today.\"\nThe email contains no additional details.\nDuring the day, you notice your manager is busy in meetings and doesn't speak to you.\nA colleague casually asks,\n\"Did you also get that email?\"\nBy lunchtime, you begin wondering whether something is wrong.",
+    "steps": [
+      {
+        "step_number": 1,
+        "key": "detect",
+        "insight": null,
+        "inputs": [
+          {
+            "field_key": "facts",
+            "prompt": "Write only the facts.",
+            "multiline": true
+          },
+          {
+            "field_key": "story",
+            "prompt": "Now write the story your mind is creating.",
+            "multiline": true
+          }
+        ],
+        "reference_example": null
+      },
+      {
+        "step_number": 2,
+        "key": "decode",
+        "prompt": "Which thinking trap(s) do you think might be influencing your thinking?",
+        "input_type": "multi_choice",
+        "options": [
+          {
+            "key": "mind_reading",
+            "label": "Mind Reading",
+            "definition": "Assuming others' intentions without evidence."
+          },
+          {
+            "key": "fortune_telling",
+            "label": "Fortune Telling",
+            "definition": "Treating an unverified prediction as certain."
+          },
+          {
+            "key": "emotional_reasoning",
+            "label": "Emotional Reasoning",
+            "definition": "Treating a feeling as proof of reality."
+          },
+          {
+            "key": "catastrophizing",
+            "label": "Catastrophizing",
+            "definition": "Assuming the absolute worst outcome."
+          },
+          {
+            "key": "confirmation_bias",
+            "label": "Confirmation Bias",
+            "definition": "Only seeing details that confirm the feared story."
+          },
+          {
+            "key": "rumination",
+            "label": "Rumination",
+            "definition": "Repetitive, circular overthinking of past events."
+          },
+          {
+            "key": "all_or_nothing",
+            "label": "All-or-Nothing Thinking",
+            "definition": "Treating a minor gap as total failure."
+          },
+          {
+            "key": "validation_seeking",
+            "label": "Validation Seeking",
+            "definition": "Heavy reliance on immediate external acknowledgment."
+          },
+          {
+            "key": "sunk_cost",
+            "label": "Sunk Cost Fallacy",
+            "definition": "Continuing a course of action because of past investment rather than future value."
+          }
+        ],
+        "correct_option_key": null,
+        "explanation_reveal": "end_of_day",
+        "explanation": "(No explanation shown — revealed only in end-of-day walkthrough)",
+        "note": "(More than one may apply)"
+      },
+      {
+        "step_number": 3,
+        "key": "reality_check",
+        "tip": null,
+        "inputs": [
+          {
+            "field_key": "q1",
+            "prompt": "1. What facts do you know for certain?"
+          },
+          {
+            "field_key": "q2",
+            "prompt": "2. What assumptions are you making?"
+          },
+          {
+            "field_key": "q3",
+            "prompt": "3. What evidence supports those assumptions?"
+          },
+          {
+            "field_key": "q4",
+            "prompt": "4. What evidence challenges them?"
+          },
+          {
+            "field_key": "q5",
+            "prompt": "5. What important information is still missing?"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "key": "reframe",
+        "inputs": [
+          {
+            "field_key": "alt_explanations",
+            "prompt": "Write at least 4 other explanations that also fit the facts.",
+            "type": "multi_entry",
+            "min_entries": 4
+          }
+        ],
+        "reference_example": null
+      },
+      {
+        "step_number": 5,
+        "key": "intervention",
+        "reminder": null,
+        "inputs": [
+          {
+            "field_key": "action",
+            "prompt": "Based on the evidence available, what is the most reasonable action?"
+          }
+        ],
+        "reference_example": null
+      },
+      {
+        "step_number": 6,
+        "key": "internalize",
+        "inputs": [
+          {
+            "field_key": "principle",
+            "prompt": "Complete this sentence: \"Today I learned that...\""
+          }
+        ],
+        "reference_example": null
+      }
+    ],
+    "closing_reflection": {
+      "prompt": "Congratulations. Twenty days ago, ThinkClear guided you through every step. Today, you completed the framework largely on your own. The goal was never to memorize six steps — it was to practise using them until they became familiar. This is the end of Phase 1. Tomorrow, the situations become less structured, the guidance becomes lighter, and the uncertainty becomes greater — but the framework stays the same. You're ready for Phase 2.",
+      "journal_input": {
+        "field_key": "journal",
+        "prompt": "Optional journal entry — user may type or speak a personal reflection here (not scored).",
+        "required": false
+      }
+    },
+    "end_of_day_walkthrough": {
+      "facts": [
+        "My manager asked to see me before I leave today.",
+        "The email didn't explain why.",
+        "My manager has been busy in meetings.",
+        "A colleague also received a similar email."
+      ],
+      "traps_present": [
+        "Fortune Telling",
+        "Mind Reading",
+        "Catastrophizing"
+      ],
+      "alternative_explanations": [
+        "The manager wants to discuss an upcoming project.",
+        "It's a routine one-to-one meeting.",
+        "The manager needs information before tomorrow.",
+        "Several team members are meeting individually today.",
+        "The meeting has nothing to do with my performance."
+      ],
+      "one_reasonable_action": [
+        "Attend the meeting with an open mind.",
+        "Avoid drawing conclusions before hearing what your manager has to say."
+      ]
+    }
+  }
+]
