@@ -28,6 +28,8 @@ Route::prefix('v1')->group(function () {
 
         // User Auth & Profile
         Route::get('/user/profile', [AuthController::class, 'profile']);
+        Route::post('/user/profile', [AuthController::class, 'updateProfile']);
+        Route::put('/user/profile', [AuthController::class, 'updateProfile']);
         Route::post('/logout', [AuthController::class, 'logout']);
 
         // Phase 1 Foundation Program APIs (/api/v1/foundation/...)

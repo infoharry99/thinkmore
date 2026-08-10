@@ -214,6 +214,52 @@ class AuthController extends Controller
     }
 
     /**
+     * Update authenticated user profile
+     * POST / PUT /api/v1/user/profile
+     */
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8',
+            'current_password' => 'nullable|string',
+        ]);
+
+        // If updating password and current_password provided, verify it
+        if (!empty($validated['password'])) {
+            if ($user->password && !empty($validated['current_password'])) {
+                if (!Hash::check($validated['current_password'], $user->password)) {
+                    throw ValidationException::withMessages([
+                        'current_password' => ['The provided current password does not match.'],
+                    ]);
+                }
+            }
+            $user->password = Hash::make($validated['password']);
+        }
+
+        if (!empty($validated['name'])) {
+            $user->name = $validated['name'];
+        }
+
+        if (!empty($validated['email'])) {
+            $user->email = $validated['email'];
+        }
+
+        $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Profile updated successfully',
+            'data' => [
+                'user' => $user->fresh(),
+            ]
+        ], 200);
+    }
+
+    /**
      * Logout user (Revoke token)
      */
     public function logout(Request $request)

@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "thinkclear-api-collection-v1",
 		"name": "ThinkClear REST API Collection",
-		"description": "Complete Postman collection for ThinkClear mobile application REST APIs and Admin endpoints, including Sanctum Bearer token auto-handling, Social Login (Google/Apple), and OTP Password Reset.",
+		"description": "Complete Postman collection for ThinkClear mobile application REST APIs, Foundation Program Phase 1 (Days 1-20), and Admin endpoints, including Sanctum Bearer token auto-handling, Social Login (Google/Apple), Profile Updates, and OTP Password Reset.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"variable": [
@@ -256,6 +256,42 @@
 					"response": []
 				},
 				{
+					"name": "Update User Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Arun R. Mishra\",\n  \"email\": \"arun@example.com\",\n  \"password\": \"newpassword123\",\n  \"current_password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						},
+						"description": "Updates authenticated user profile name, email, or password."
+					},
+					"response": []
+				},
+				{
 					"name": "Logout User",
 					"request": {
 						"method": "POST",
@@ -285,7 +321,179 @@
 			]
 		},
 		{
-			"name": "2. Case Engine & Daily Practice",
+			"name": "2. Foundation Program (Phase 1 APIs)",
+			"item": [
+				{
+					"name": "2.1 Get Day Content (Day 1)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/foundation/phase1/days/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"foundation",
+								"phase1",
+								"days",
+								"1"
+							]
+						},
+						"description": "Returns full curriculum bundle for Day 1 matching exact handoff specification."
+					},
+					"response": []
+				},
+				{
+					"name": "2.2 Submit Day Responses (Day 1)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"responses\": {\n    \"detect.facts\": \"He read my message three hours ago and hasn't replied.\",\n    \"detect.story\": \"He's upset with me and ignoring me.\",\n    \"decode.selected_option\": \"mind_reading\",\n    \"reality_check.q1\": \"He read the message three hours ago.\",\n    \"reality_check.q2\": \"That he's upset with me.\",\n    \"reality_check.q3\": \"He hasn't replied yet.\",\n    \"reality_check.q4\": \"He often replies late when busy at work.\",\n    \"reality_check.q5\": \"I'd tell them to wait before assuming the worst.\",\n    \"reframe.alt_explanations\": [\n      \"He got busy at work.\",\n      \"His phone died.\",\n      \"He's driving.\"\n    ],\n    \"reframe.one_more_explanation\": \"He's in a meeting and can't check his phone.\",\n    \"intervention.action\": \"Wait until end of day, then send one calm follow-up message.\",\n    \"internalize.principle\": \"A delayed reply is a fact, not a betrayal.\",\n    \"closing.journal\": \"I do this with my sister too — I'll notice it next time.\"\n  },\n  \"input_method\": \"typed\",\n  \"started_at\": \"2026-08-10T09:00:00Z\",\n  \"completed_at\": \"2026-08-10T09:05:00Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/foundation/phase1/days/1/responses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"foundation",
+								"phase1",
+								"days",
+								"1",
+								"responses"
+							]
+						},
+						"description": "Submits all 6 step responses, updates user progress, and returns decode validation results."
+					},
+					"response": []
+				},
+				{
+					"name": "2.3 Get Saved Responses (Day 1)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/foundation/phase1/days/1/responses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"foundation",
+								"phase1",
+								"days",
+								"1",
+								"responses"
+							]
+						},
+						"description": "Returns user's saved responses for resuming or reviewing."
+					},
+					"response": []
+				},
+				{
+					"name": "2.4 Get Progress / Unlock State",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/foundation/progress",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"foundation",
+								"progress"
+							]
+						},
+						"description": "Returns overall user progress state, completed day numbers, and Phase 1 completion flag."
+					},
+					"response": []
+				},
+				{
+					"name": "2.5 Submit Day 20 Responses (Checkpoint)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"responses\": {\n    \"detect.facts\": \"My manager asked to see me before I leave today.\",\n    \"detect.story\": \"I'm in trouble.\",\n    \"decode.selected_option\": \"fortune_telling\",\n    \"reality_check.q1\": \"My manager asked to see me before I leave.\",\n    \"reality_check.q2\": \"That something is wrong.\",\n    \"reframe.alt_explanations\": [\n      \"Manager wants to discuss a project.\",\n      \"Routine 1-on-1 meeting.\",\n      \"Manager needs information before tomorrow.\",\n      \"Several team members meeting today.\"\n    ],\n    \"intervention.action\": \"Attend meeting with an open mind.\",\n    \"internalize.principle\": \"Wait for evidence before drawing conclusions.\"\n  },\n  \"input_method\": \"typed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/foundation/phase1/days/20/responses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"foundation",
+								"phase1",
+								"days",
+								"20",
+								"responses"
+							]
+						},
+						"description": "Submits Day 20 responses and returns the end_of_day_walkthrough object."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Case Engine & Daily Practice",
 			"item": [
 				{
 					"name": "Get Today's Case Scenario",
@@ -354,7 +562,7 @@
 			]
 		},
 		{
-			"name": "3. 60-Day Foundation Survey (PDF 1 Spec)",
+			"name": "4. 60-Day Foundation Survey (PDF 1 Spec)",
 			"item": [
 				{
 					"name": "Submit Feedback (Rating >= 4)",
@@ -457,7 +665,7 @@
 			]
 		},
 		{
-			"name": "4. Admin Panel APIs",
+			"name": "5. Admin Panel APIs",
 			"item": [
 				{
 					"name": "Get Admin Dashboard Analytics",

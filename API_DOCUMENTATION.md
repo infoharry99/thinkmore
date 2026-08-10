@@ -12,7 +12,42 @@
 - `POST /api/v1/forgot-password` — Request 6-digit OTP
 - `POST /api/v1/reset-password` — Verify OTP & Reset Password
 - `GET /api/v1/user/profile` — Get User Profile Details
+- `POST /api/v1/user/profile` or `PUT /api/v1/user/profile` — Update Profile (Name, Email, Password)
 - `POST /api/v1/logout` — Revoke Bearer Token
+
+### 1.1 Update User Profile API
+- **Endpoint**: `POST /api/v1/user/profile` (or `PUT /api/v1/user/profile`)
+- **Auth**: Bearer token required
+- **Description**: Updates the authenticated student user's profile details (Name, Email, or Password).
+
+**Request Body**:
+```json
+{
+  "name": "Arun R. Mishra",
+  "email": "arun@example.com",
+  "password": "newpassword123",
+  "current_password": "password123"
+}
+```
+
+**Response 200 OK**:
+```json
+{
+  "status": "success",
+  "message": "Profile updated successfully",
+  "data": {
+    "user": {
+      "id": 2,
+      "name": "Arun R. Mishra",
+      "email": "arun@example.com",
+      "provider": "Email",
+      "current_day": 1,
+      "phase": 1,
+      "role": "user"
+    }
+  }
+}
+```
 
 ---
 
@@ -79,35 +114,6 @@
 }
 ```
 
-**Response (Days 1–19)**:
-```json
-{
-  "day": 1,
-  "status": "completed",
-  "decode_result": {
-    "selected_option": "mind_reading",
-    "is_correct": true,
-    "explanation": "Why Mind Reading. The only confirmed fact is that there has been no reply..."
-  },
-  "unlocked_next_day": 2
-}
-```
-
-**Response (Day 20 Checkpoint)**:
-```json
-{
-  "day": 20,
-  "status": "completed",
-  "end_of_day_walkthrough": {
-    "facts": [ ... ],
-    "traps_present": [ "Fortune Telling", "Mind Reading", "Catastrophizing" ],
-    "alternative_explanations": [ ... ],
-    "one_reasonable_action": [ ... ]
-  },
-  "unlocked_next_day": 21
-}
-```
-
 ---
 
 ### 2.3 Get Saved Responses
@@ -115,32 +121,9 @@
 - **Auth**: Bearer token required
 - **Description**: Returns the user's saved responses for a day (enables resuming in-progress days or reviewing past completed days for Day 60 growth comparison).
 
-**Response 200 OK**:
-```json
-{
-  "day": 1,
-  "status": "completed",
-  "responses": { ... },
-  "input_method": "typed",
-  "started_at": "2026-08-10T09:00:00Z",
-  "completed_at": "2026-08-10T09:05:00Z"
-}
-```
-
 ---
 
 ### 2.4 Get Progress / Unlock State
 - **Endpoint**: `GET /api/v1/foundation/progress`
 - **Auth**: Bearer token required
 - **Description**: Returns the overall progress state, completed day numbers, current phase, current day, and Day 0 completion status.
-
-**Response 200 OK**:
-```json
-{
-  "day0_completed": true,
-  "current_phase": 1,
-  "current_day": 6,
-  "completed_days": [ 1, 2, 3, 4, 5 ],
-  "phase1_completed": false
-}
-```
