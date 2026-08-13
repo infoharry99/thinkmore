@@ -11,13 +11,6 @@
             <p style="font-size: 13px; color: #6B7280; margin-top: 4px;">Manage the 20 judgment scenarios, 6-step framework copy, decode options, tips, and JSON bundles served by the REST API.</p>
         </div>
         <div style="display: flex; gap: 10px; align-items: center;">
-            <form action="{{ route('admin.foundation.seed') }}" method="POST" onsubmit="return confirm('Re-seed all 20 Phase 1 days from original JSON dataset?');" style="display: inline;">
-                @csrf
-                <button type="submit" class="btn btn-outline-success" style="border-radius: 10px; font-size: 13px; font-weight: 700; padding: 9px 16px;">
-                    <i class="bi bi-arrow-repeat"></i> Re-seed Days 1–20 Data
-                </button>
-            </form>
-
             <a href="{{ route('admin.foundation.create') }}" class="btn-primary" style="padding: 10px 20px; font-weight: 700; border-radius: 10px;">
                 <i class="bi bi-plus-circle"></i> Add New Foundation Day
             </a>
@@ -142,7 +135,7 @@
                 <tr>
                     <td colspan="8" style="text-align: center; color: #9CA3AF; padding: 32px;">
                         <i class="bi bi-calendar-x" style="font-size: 28px; display: block; margin-bottom: 8px; color: #CBD5E1;"></i>
-                        No matching Foundation Program days found. Click <strong>"Re-seed Days 1–20 Data"</strong> above to populate!
+                        No matching Foundation Program days found.
                     </td>
                 </tr>
                 @endforelse
