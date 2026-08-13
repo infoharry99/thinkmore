@@ -181,9 +181,9 @@ class AdminWebController extends Controller
                         'prompt' => 'Which thinking trap is most likely at work?',
                         'input_type' => 'single_choice',
                         'options' => [
-                            ['key' => Str::slug($request->primary_trap, '_'), 'label' => $request->primary_trap, 'definition' => 'Main thinking trap']
+                            ['key' => \Illuminate\Support\Str::slug($request->primary_trap, '_'), 'label' => $request->primary_trap, 'definition' => 'Main thinking trap']
                         ],
-                        'correct_option_key' => Str::slug($request->primary_trap, '_'),
+                        'correct_option_key' => \Illuminate\Support\Str::slug($request->primary_trap, '_'),
                         'explanation_reveal' => 'after_selection',
                         'explanation' => $request->decode_explanation ?? ''
                     ],
@@ -466,11 +466,36 @@ class AdminWebController extends Controller
         return view('admin.feedbacks.index', compact('feedbacks'));
     }
 
-    public function usersIndex()
+    public function usersIndex(Request $request)
     {
-        $users = User::where(function($q) {
+        $query = User::where(function($q) {
             $q->where('role', '!=', 'admin')->orWhereNull('role');
-        })->latest()->paginate(15);
+        })->latest();
+
+        if ($request->filled('search')) {
+            $search = trim($request->search);
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                  ->orWhere('email', 'LIKE', "%{$search}%")
+                  ->orWhere('id', 'LIKE', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('provider')) {
+            if ($request->provider === 'email') {
+                $query->where(function($q) {
+                    $q->whereNull('provider')->orWhere('provider', 'email');
+                });
+            } else {
+                $query->where('provider', $request->provider);
+            }
+        }
+
+        if ($request->filled('phase') && $request->phase !== '') {
+            $query->where('phase', (int)$request->phase);
+        }
+
+        $users = $query->paginate(15)->withQueryString();
 
         return view('admin.users.index', compact('users'));
     }
