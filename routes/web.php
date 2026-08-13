@@ -26,6 +26,11 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [AdminWebController::class, 'dashboard'])->name('admin.dashboard');
         
+        // Admin Profile & Password Settings
+        Route::get('/profile', [AdminWebController::class, 'profileShow'])->name('admin.profile');
+        Route::put('/profile', [AdminWebController::class, 'profileUpdate'])->name('admin.profile.update');
+        Route::put('/profile/password', [AdminWebController::class, 'passwordUpdate'])->name('admin.profile.password');
+
         // Foundation Program Days Management (Phase 1 Days 1–20)
         Route::get('/foundation', [AdminWebController::class, 'foundationIndex'])->name('admin.foundation.index');
         Route::get('/foundation/create', [AdminWebController::class, 'foundationCreate'])->name('admin.foundation.create');

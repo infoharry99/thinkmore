@@ -96,16 +96,14 @@
             <a href="{{ route('admin.foundation.index') }}" class="nav-item {{ request()->routeIs('admin.foundation*') ? 'active' : '' }}">
                 <i class="bi bi-calendar-check"></i> Foundation Days (Phase 1)
             </a>
-            {{-- Commented out legacy Case Library sidebar item
-            <a href="{{ route('admin.cases.index') }}" class="nav-item {{ request()->routeIs('admin.cases*') ? 'active' : '' }}">
-                <i class="bi bi-journal-text"></i> Case Library
-            </a>
-            --}}
             <a href="{{ route('admin.feedbacks.index') }}" class="nav-item {{ request()->routeIs('admin.feedbacks*') ? 'active' : '' }}">
                 <i class="bi bi-chat-square-quote"></i> Foundation Feedbacks
             </a>
             <a href="{{ route('admin.users.index') }}" class="nav-item {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
                 <i class="bi bi-people"></i> User Progress
+            </a>
+            <a href="{{ route('admin.profile') }}" class="nav-item {{ request()->routeIs('admin.profile*') ? 'active' : '' }}">
+                <i class="bi bi-person-gear"></i> Admin Profile
             </a>
         </nav>
     </aside>
@@ -115,7 +113,9 @@
         <header class="topbar">
             <h2 style="font-size: 20px; font-weight: 800; margin: 0;">@yield('title', 'Dashboard')</h2>
             <div class="user-info">
-                <span><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</span>
+                <a href="{{ route('admin.profile') }}" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 6px;" title="Edit Admin Profile">
+                    <i class="bi bi-person-circle" style="color: #1E6146; font-size: 18px;"></i> {{ Auth::user()->name }}
+                </a>
                 <form action="{{ route('admin.logout') }}" method="POST" style="display:inline;">
                     @csrf
                     <button type="submit" class="btn-logout"><i class="bi bi-box-arrow-right"></i> Logout</button>

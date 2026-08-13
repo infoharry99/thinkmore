@@ -9,6 +9,7 @@ use App\Models\FoundationDay;
 use App\Models\FoundationFeedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
 use Database\Seeders\FoundationPhase1Seeder;
 
@@ -80,6 +81,52 @@ class AdminWebController extends Controller
             ->get();
 
         return view('admin.dashboard', compact('stats', 'recentFeedbacks', 'recentUsers'));
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Profile & Password Management
+    |--------------------------------------------------------------------------
+    */
+
+    public function profileShow()
+    {
+        $admin = Auth::user();
+        return view('admin.profile.index', compact('admin'));
+    }
+
+    public function profileUpdate(Request $request)
+    {
+        $admin = Auth::user();
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $admin->id,
+        ]);
+
+        $admin->update($validated);
+
+        return redirect()->route('admin.profile')->with('success', 'Admin profile details updated successfully!');
+    }
+
+    public function passwordUpdate(Request $request)
+    {
+        $admin = Auth::user();
+
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        if (!Hash::check($request->current_password, $admin->password)) {
+            return back()->withErrors(['current_password' => 'The provided current password does not match our records.']);
+        }
+
+        $admin->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return redirect()->route('admin.profile')->with('success', 'Admin password changed successfully!');
     }
 
     /*
