@@ -96,9 +96,11 @@
             <a href="{{ route('admin.foundation.index') }}" class="nav-item {{ request()->routeIs('admin.foundation*') ? 'active' : '' }}">
                 <i class="bi bi-calendar-check"></i> Foundation Days (Phase 1)
             </a>
+            {{-- Commented out legacy Case Library sidebar item
             <a href="{{ route('admin.cases.index') }}" class="nav-item {{ request()->routeIs('admin.cases*') ? 'active' : '' }}">
                 <i class="bi bi-journal-text"></i> Case Library
             </a>
+            --}}
             <a href="{{ route('admin.feedbacks.index') }}" class="nav-item {{ request()->routeIs('admin.feedbacks*') ? 'active' : '' }}">
                 <i class="bi bi-chat-square-quote"></i> Foundation Feedbacks
             </a>
