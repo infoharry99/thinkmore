@@ -93,6 +93,9 @@
             <a href="{{ route('admin.dashboard') }}" class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                 <i class="bi bi-speedometer2"></i> Dashboard
             </a>
+            <a href="{{ route('admin.foundation.index') }}" class="nav-item {{ request()->routeIs('admin.foundation*') ? 'active' : '' }}">
+                <i class="bi bi-calendar-check"></i> Foundation Days (Phase 1)
+            </a>
             <a href="{{ route('admin.cases.index') }}" class="nav-item {{ request()->routeIs('admin.cases*') ? 'active' : '' }}">
                 <i class="bi bi-journal-text"></i> Case Library
             </a>

@@ -26,7 +26,17 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [AdminWebController::class, 'dashboard'])->name('admin.dashboard');
         
-        // Case Management CRUD & Interactive Mobile Preview
+        // Foundation Program Days Management (Phase 1 Days 1–20)
+        Route::get('/foundation', [AdminWebController::class, 'foundationIndex'])->name('admin.foundation.index');
+        Route::get('/foundation/create', [AdminWebController::class, 'foundationCreate'])->name('admin.foundation.create');
+        Route::post('/foundation', [AdminWebController::class, 'foundationStore'])->name('admin.foundation.store');
+        Route::get('/foundation/{id}/edit', [AdminWebController::class, 'foundationEdit'])->name('admin.foundation.edit');
+        Route::put('/foundation/{id}', [AdminWebController::class, 'foundationUpdate'])->name('admin.foundation.update');
+        Route::get('/foundation/{id}/preview', [AdminWebController::class, 'foundationPreview'])->name('admin.foundation.preview');
+        Route::delete('/foundation/{id}', [AdminWebController::class, 'foundationDestroy'])->name('admin.foundation.destroy');
+        Route::post('/foundation/seed', [AdminWebController::class, 'foundationReSeed'])->name('admin.foundation.seed');
+
+        // Case Management CRUD & Interactive Mobile Preview (Legacy)
         Route::get('/cases', [AdminWebController::class, 'casesIndex'])->name('admin.cases.index');
         Route::get('/cases/create', [AdminWebController::class, 'casesCreate'])->name('admin.cases.create');
         Route::post('/cases', [AdminWebController::class, 'casesStore'])->name('admin.cases.store');
