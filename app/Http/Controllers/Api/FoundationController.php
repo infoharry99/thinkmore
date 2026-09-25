@@ -126,13 +126,12 @@ class FoundationController extends Controller
         if ($user->current_day <= $dayNumber) {
             $user->current_day = $dayNumber + 1;
             
-            // Automatically assign appropriate phase
-            if ($user->current_day > 40) {
-                $user->phase = 3;
-            } elseif ($user->current_day > 20) {
-                $user->phase = 2;
+            // Automatically assign phase dynamically from the next day's database record
+            $nextDayRecord = FoundationDay::where('day_number', $user->current_day)->first();
+            if ($nextDayRecord) {
+                $user->phase = (int) $nextDayRecord->phase;
             } else {
-                $user->phase = 1;
+                $user->phase = (int) $dayPhase;
             }
             
             $user->save();
@@ -256,26 +255,35 @@ class FoundationController extends Controller
             ->values()
             ->toArray();
 
-        $phase1Completed = count(array_intersect(range(1, 20), $completedDays)) === 20;
-        $phase2Completed = count(array_intersect(range(21, 40), $completedDays)) === 20;
-
         $currentDay = (int) $user->current_day;
-        if ($currentDay > 40) {
-            $currentPhase = 3;
-        } elseif ($currentDay > 20) {
-            $currentPhase = 2;
+        
+        // Dynamically determine current phase from database curriculum
+        $currentDayRecord = FoundationDay::where('day_number', $currentDay)->first();
+        if ($currentDayRecord) {
+            $currentPhase = (int) $currentDayRecord->phase;
         } else {
-            $currentPhase = 1;
+            $lastDay = FoundationDay::orderBy('day_number', 'desc')->first();
+            $currentPhase = $lastDay ? (int) $lastDay->phase : (int) ($user->phase ?? 1);
         }
 
-        return response()->json([
+        $totalDaysAvailable = FoundationDay::count();
+
+        // Dynamically compute completion status for all available phases (Phase 1, 2, 3, 4, 5, etc.)
+        $phases = FoundationDay::distinct()->pluck('phase')->sort()->values();
+        $phasesStatus = [];
+        foreach ($phases as $ph) {
+            $phDays = FoundationDay::where('phase', $ph)->pluck('day_number')->toArray();
+            $phasesStatus["phase{$ph}_completed"] = count($phDays) > 0 && count(array_intersect($phDays, $completedDays)) === count($phDays);
+        }
+
+        return response()->json(array_merge([
             'day0_completed' => (bool) ($user->day0_completed ?? true),
             'current_phase' => $currentPhase,
             'current_day' => $currentDay,
             'completed_days' => $completedDays,
-            'phase1_completed' => $phase1Completed,
-            'phase2_completed' => $phase2Completed,
-            'total_days_available' => 40,
-        ], 200);
+            'phase1_completed' => $phasesStatus['phase1_completed'] ?? false,
+            'phase2_completed' => $phasesStatus['phase2_completed'] ?? false,
+            'total_days_available' => $totalDaysAvailable,
+        ], $phasesStatus), 200);
     }
 }
