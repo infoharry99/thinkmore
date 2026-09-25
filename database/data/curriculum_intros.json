@@ -1,0 +1,123 @@
+{
+  "app_introduction": {
+    "title": "THINKCLEAR",
+    "subtitle": "Your Judgment Journey",
+    "headline": "ThinkClear is designed to help you build a repeatable habit of thinking clearly.",
+    "description": "You will not be given answers to life's decisions. Instead, you will learn to slow down your thinking, separate facts from assumptions, recognize thinking traps, test your conclusions, consider alternatives, and choose thoughtful actions.",
+    "framework_overview": "The journey has three phases. Each phase uses the same six-step ThinkClear Framework. What changes is the complexity of the situation, the amount of guidance you receive, and the level of judgment you are expected to apply.",
+    "phases_summary": [
+      {
+        "phase": 1,
+        "name": "Foundation",
+        "description": "Learn the six-step process."
+      },
+      {
+        "phase": 2,
+        "name": "Application",
+        "description": "Use the six-step process when situations become complicated."
+      },
+      {
+        "phase": 3,
+        "name": "Decision Fitness",
+        "description": "Use the same six-step process when the decision has major consequences."
+      }
+    ],
+    "six_steps": [
+      { "step": 1, "name": "DETECT", "description": "Separate facts from the story the mind creates." },
+      { "step": 2, "name": "DECODE", "description": "Identify the thinking trap(s) influencing judgment." },
+      { "step": 3, "name": "REALITY CHECK", "description": "Test assumptions against evidence and identify missing information." },
+      { "step": 4, "name": "REFRAME", "description": "Generate alternative explanations, options and perspectives." },
+      { "step": 5, "name": "INTERVENTION", "description": "Choose the most reasonable next action based on the evidence available." },
+      { "step": 6, "name": "INTERNALIZE", "description": "Convert the experience into a reusable judgment principle." }
+    ],
+    "nine_thinking_traps": [
+      "Mind Reading",
+      "Fortune Telling",
+      "Emotional Reasoning",
+      "Catastrophizing",
+      "Confirmation Bias",
+      "Rumination",
+      "All-or-Nothing Thinking",
+      "Validation Seeking",
+      "Sunk Cost Fallacy"
+    ]
+  },
+  "phase1_introduction": {
+    "phase": 1,
+    "days_range": "Days 1–20",
+    "title": "PHASE 1 — FOUNDATION",
+    "subtitle": "Learn to Think Clearly",
+    "overview": "Phase 1 is where you learn the fundamentals of good judgment. For the first 20 days, you will work through everyday situations that are familiar and easy to recognize: relationships, family, workplace situations, career, business, finance and other parts of daily life.",
+    "common_thoughts": [
+      "“They haven't replied. Are they upset with me?”",
+      "“My manager wants to meet me. Something must be wrong.”",
+      "“I wasn't promoted. They don't value me.”",
+      "“I made a mistake. I've ruined everything.”"
+    ],
+    "rationale": "These situations may appear small. That's intentional. Before you can make better decisions in complicated situations, you need to learn to recognize what your mind does automatically.",
+    "what_you_will_learn": [
+      "Separate facts from stories",
+      "Recognize the thinking traps influencing your judgment",
+      "Test assumptions against evidence",
+      "Generate alternative explanations",
+      "Choose a thoughtful action instead of reacting automatically",
+      "Turn each exercise into a reusable judgment principle"
+    ],
+    "guidance_note": "You will be guided through the six steps. You will see examples and explanations so that you understand how ThinkClear works. By the end of Phase 1, you should be able to look at an everyday situation and ask yourself: What actually happened? What am I assuming? What evidence do I have? What else could be true? What should I do next?",
+    "goal": "Learn the process. You are building the foundation on which everything else will be developed."
+  },
+  "phase2_introduction": {
+    "phase": 2,
+    "days_range": "Days 21–40",
+    "title": "PHASE 2 — APPLICATION",
+    "subtitle": "Use the Process When Things Get Complicated",
+    "tagline": "Revised 20-Day Case Study Curriculum | Days 21–40",
+    "overview": "You now know the ThinkClear framework. Phase 2 is about using it when situations become less obvious. The situations will become more ambiguous. There may be several possible explanations. More than one thinking trap may be present. The available information may be incomplete. There may be competing interests. And sometimes, there may be more than one reasonable action. You will increasingly have to think before ThinkClear shows you its analysis.",
+    "what_you_will_learn": [
+      "Apply all six steps rather than simply identify a thinking trap",
+      "Handle situations where the facts do not immediately tell you what to do",
+      "Recognize when multiple thinking traps may be operating simultaneously",
+      "Identify missing information",
+      "Challenge your own first interpretation",
+      "Consider competing explanations and perspectives",
+      "Compare possible actions",
+      "Recognize trade-offs and opportunity costs",
+      "Make a reasonable decision even when certainty is impossible"
+    ],
+    "guidance_shift": "The guidance will gradually decrease. Instead of being told: “Here is the thinking trap.” you will increasingly be asked: “What do you think is happening?”, “What are you assuming?”, “What evidence would you need?”, “What else could explain this?”, “What options do you have?”, “What would you do next, and why?”. ThinkClear will then show you its reasoning so that you can compare your thinking rather than simply copy an answer.",
+    "progression": [
+      { "days": "Days 21–25", "focus": "Ambiguity, multiple interpretations, multiple traps, more realistic consequences." },
+      { "days": "Days 26–30", "focus": "Competing interests, incomplete information, conflicting evidence, more than one reasonable action." },
+      { "days": "Days 31–35", "focus": "Decisions rather than reactions, trade-offs, opportunity cost, uncertainty." },
+      { "days": "Days 36–40", "focus": "Multi-variable situations, consequences beyond the immediate situation, competing values, harder-to-identify traps." }
+    ],
+    "interaction_principle": {
+      "early_phase2": "Think → Commit → Compare → Reflect",
+      "late_phase2": "Think → Commit → Defend → Compare → Reflect"
+    },
+    "goal": "Learn to apply judgment independently when situations become complicated. By the end of Phase 2, you should no longer need ThinkClear to tell you where to look. You should begin to know where to look yourself."
+  },
+  "phase3_introduction": {
+    "phase": 3,
+    "days_range": "Days 41–60",
+    "title": "PHASE 3 — DECISION FITNESS",
+    "subtitle": "Build Judgment for Decisions That Matter",
+    "overview": "Phase 1 taught you how to recognize your thinking. Phase 2 taught you how to apply the process to increasingly complicated situations. Phase 3 takes the same process into consequential decisions. These are situations where the decision may affect your career, business, finances, relationships, family, future opportunities or other important parts of your life.",
+    "challenges": "The situations will not necessarily have an obvious right answer. You may have incomplete information. You may have competing priorities. You may have something significant to gain—and something significant to lose. And sometimes, two options may both be reasonable. That is where judgment matters.",
+    "what_you_will_learn": [
+      "Apply the complete ThinkClear framework to consequential decisions",
+      "Separate emotional urgency from actual decision urgency",
+      "Identify the assumptions on which a decision depends",
+      "Determine what information is genuinely important before deciding",
+      "Recognize multiple thinking traps operating together",
+      "Generate options beyond a simple “yes or no”",
+      "Examine trade-offs and opportunity costs",
+      "Consider short-term and long-term consequences",
+      "Distinguish reversible decisions from difficult-to-reverse decisions",
+      "Identify what could change your decision",
+      "Make a deliberate decision despite uncertainty"
+    ],
+    "scaffolding_note": "And there will be less scaffolding. You will increasingly be given a complicated situation and asked: Think it through. You will be expected to work through the six steps yourself. ThinkClear's role is not to tell you: “This is the right decision.” Its role is to help you examine how you arrived at your decision.",
+    "goal": "Build the judgment you need when the decision really matters."
+  }
+}

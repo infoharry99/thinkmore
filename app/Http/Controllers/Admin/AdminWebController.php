@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
 use Database\Seeders\FoundationPhase1Seeder;
+use Database\Seeders\FoundationPhase2Seeder;
 
 class AdminWebController extends Controller
 {
@@ -156,6 +157,10 @@ class AdminWebController extends Controller
 
         if ($request->filled('trap')) {
             $query->where('primary_trap', $request->trap);
+        }
+
+        if ($request->filled('phase')) {
+            $query->where('phase', $request->phase);
         }
 
         $days = $query->paginate(15)->withQueryString();
@@ -358,12 +363,25 @@ class AdminWebController extends Controller
         return redirect()->route('admin.foundation.index')->with('success', "Foundation Day {$dayNumber} deleted.");
     }
 
-    public function foundationReSeed()
+    public function foundationReSeed(Request $request)
     {
-        $seeder = new FoundationPhase1Seeder();
-        $seeder->run();
+        $phase = $request->input('phase');
 
-        return redirect()->route('admin.foundation.index')->with('success', 'All 20 Phase 1 Foundation Program Days successfully re-seeded from JSON dataset!');
+        if ($phase == 1) {
+            $seeder = new FoundationPhase1Seeder();
+            $seeder->run();
+            $msg = 'All 20 Phase 1 Foundation Program Days successfully re-seeded from JSON dataset!';
+        } elseif ($phase == 2) {
+            $seeder = new FoundationPhase2Seeder();
+            $seeder->run();
+            $msg = 'All 20 Phase 2 Application Curriculum Days (Days 21–40) successfully re-seeded from JSON dataset!';
+        } else {
+            (new FoundationPhase1Seeder())->run();
+            (new FoundationPhase2Seeder())->run();
+            $msg = 'All 40 Curriculum Days (Phases 1 & 2, Days 1–40) successfully re-seeded from JSON dataset!';
+        }
+
+        return redirect()->route('admin.foundation.index')->with('success', $msg);
     }
 
     /*

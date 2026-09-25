@@ -5,125 +5,88 @@
 
 ---
 
-## 1. Auth Endpoints
-- `POST /api/v1/register` — Standard User Registration
-- `POST /api/v1/login` — Email & Password Login
-- `POST /api/v1/social-login` — Google & Apple OAuth Login
-- `POST /api/v1/forgot-password` — Request 6-digit OTP
-- `POST /api/v1/reset-password` — Verify OTP & Reset Password
-- `GET /api/v1/user/profile` — Get User Profile Details
-- `POST /api/v1/user/profile` or `PUT /api/v1/user/profile` — Update Profile (Name, Email, Password)
-- `POST /api/v1/logout` — Revoke Bearer Token
+## 1. Curriculum Introductions APIs (Public & Authenticated)
 
-### 1.1 Update User Profile API
-- **Endpoint**: `POST /api/v1/user/profile` (or `PUT /api/v1/user/profile`)
-- **Auth**: Bearer token required
-- **Description**: Updates the authenticated student user's profile details (Name, Email, or Password).
+### 1.1 Get All Curriculum Introductions
+- **Endpoint**: `GET /api/v1/foundation/introductions`
+- **Auth**: None required (publicly accessible) or Bearer token
+- **Description**: Returns all introductory copy for the app-front page ("THINKCLEAR Your Judgment Journey"), Phase 1 ("PHASE 1 — FOUNDATION Learn to Think Clearly"), Phase 2 ("PHASE 2 — APPLICATION Use the Process When Things Get Complicated"), and Phase 3 ("PHASE 3 — DECISION FITNESS Build Judgment for Decisions That Matter").
 
-**Request Body**:
-```json
-{
-  "name": "Arun R. Mishra",
-  "email": "arun@example.com",
-  "password": "newpassword123",
-  "current_password": "password123"
-}
-```
-
-**Response 200 OK**:
-```json
-{
-  "status": "success",
-  "message": "Profile updated successfully",
-  "data": {
-    "user": {
-      "id": 2,
-      "name": "Arun R. Mishra",
-      "email": "arun@example.com",
-      "provider": "Email",
-      "current_day": 1,
-      "phase": 1,
-      "role": "user"
-    }
-  }
-}
-```
+### 1.2 Get Specific Phase Introduction
+- **Endpoint**: `GET /api/v1/foundation/phase/{phase_number}/intro`
+- **Parameters**: `phase_number` (1, 2, or 3)
+- **Auth**: None required or Bearer token
+- **Description**: Returns the specific introduction for Phase 1, Phase 2, or Phase 3.
 
 ---
 
-## 2. Foundation Program Phase 1 APIs (`/api/v1/foundation/...`)
+## 2. Curriculum Program APIs (`/api/v1/foundation/...`)
 
-### 2.1 Get Day Content
-- **Endpoint**: `GET /api/v1/foundation/phase1/days/{day_number}`
+### 2.1 Get Day Content (Days 1–40 / Phases 1 & 2)
+- **Endpoints**:
+  - `GET /api/v1/foundation/days/{day_number}` (General day endpoint for Days 1–60)
+  - `GET /api/v1/foundation/phase1/days/{day_number}` (Phase 1: Days 1–20)
+  - `GET /api/v1/foundation/phase2/days/{day_number}` (Phase 2: Days 21–40)
 - **Auth**: Bearer token required
-- **Description**: Returns the full curriculum content bundle for a specific day (Days 1–20), including title, domain, mission, learning objective, scenario text, 6 framework steps (Detect, Decode, Reality Check, Reframe, Intervention, Internalize), prompts, reference examples, and closing reflection.
-
-**Example 200 OK Response (Day 1)**:
-```json
-{
-  "day": 1,
-  "phase": 1,
-  "title": "Read but No Reply",
-  "domain": "Relationships",
-  "mission": "Don't let your mind write the story before the facts.",
-  "learning_objective": "Separate Facts from Stories",
-  "difficulty": "Beginner",
-  "emotional_intensity": "Low",
-  "estimated_minutes": "3-5",
-  "primary_skill": "Detect",
-  "primary_trap": "Mind Reading",
-  "secondary_trap": null,
-  "scenario_text": "Ananya sends her husband a message during lunch asking him to call when he is free.\nHe reads the message.\nThree hours pass.\nThere is still no reply.",
-  "steps": [ ... ],
-  "closing_reflection": { ... }
-}
-```
-
----
+- **Description**: Returns the full curriculum bundle for the specified day, including domain, mission, learning objective, judgment scenario, 6 framework steps (Detect, Decode, Reality Check, Reframe, Intervention, Internalize), model answers ("ThinkClear's Thinking"), and closing reflection.
 
 ### 2.2 Submit Day Responses
-- **Endpoint**: `POST /api/v1/foundation/phase1/days/{day_number}/responses`
+- **Endpoints**:
+  - `POST /api/v1/foundation/days/{day_number}/responses`
+  - `POST /api/v1/foundation/phase1/days/{day_number}/responses`
+  - `POST /api/v1/foundation/phase2/days/{day_number}/responses`
 - **Auth**: Bearer token required
-- **Description**: Submits student responses for all 6 steps and closing reflection. Updates progress, unlocks the next day, and returns decode validation results (or the end-of-day walkthrough for Day 20).
+- **Description**: Submits the user's responses for all 6 steps, updates progress, assigns current phase, and returns decode validation and next day unlocking status. On Day 20, returns Phase 1 milestone walkthrough. On Day 40, returns Phase 2 milestone walkthrough.
 
-**Request Body**:
+**Sample Request Body (Day 21)**:
 ```json
 {
   "responses": {
-    "detect.facts": "He read my message three hours ago and hasn't replied.",
-    "detect.story": "He's upset with me and ignoring me.",
-    "decode.selected_option": "mind_reading",
-    "reality_check.q1": "He read the message three hours ago.",
-    "reality_check.q2": "That he's upset with me.",
-    "reality_check.q3": "He hasn't replied yet.",
-    "reality_check.q4": "He often replies late when busy at work.",
-    "reality_check.q5": "I'd tell them to wait before assuming the worst.",
+    "detect.facts": "I have worked here three years with positive reviews. Another colleague was promoted without explanation.",
+    "detect.story": "My manager no longer believes in me.",
+    "decode.selected_option": "validation_seeking",
+    "reality_check.q1": "I wasn't promoted.",
+    "reality_check.q2": "Assuming my manager lost confidence in me.",
+    "reality_check.q3": "Colleague got promoted instead.",
+    "reality_check.q4": "My past performance was consistently appreciated.",
+    "reality_check.q5": "What specific criteria were used for the promotion?",
     "reframe.alt_explanations": [
-      "He got busy at work.",
-      "His phone died.",
-      "He's driving."
+      "Colleague had specific skills needed for that role.",
+      "Another opportunity is planned.",
+      "Budget or timing constraint.",
+      "Other factors I don't know yet."
     ],
-    "reframe.one_more_explanation": "He's in a meeting and can't check his phone.",
-    "intervention.action": "Wait until end of day, then send one calm follow-up message.",
-    "internalize.principle": "A delayed reply is a fact, not a betrayal.",
-    "closing.journal": "I do this with my sister too — I'll notice it next time."
+    "intervention.action": "Schedule a 1-on-1 with manager to ask for constructive feedback on future growth.",
+    "internalize.principle": "Not receiving what I expected doesn't automatically explain why. Good judgment begins when I separate facts from the story my mind creates.",
+    "closing.journal": "I will discuss directly with my manager before assuming anything."
   },
-  "input_method": "typed",
-  "started_at": "2026-08-10T09:00:00Z",
-  "completed_at": "2026-08-10T09:05:00Z"
+  "input_method": "typed"
 }
 ```
 
----
-
 ### 2.3 Get Saved Responses
-- **Endpoint**: `GET /api/v1/foundation/phase1/days/{day_number}/responses`
+- **Endpoints**:
+  - `GET /api/v1/foundation/days/{day_number}/responses`
+  - `GET /api/v1/foundation/phase1/days/{day_number}/responses`
+  - `GET /api/v1/foundation/phase2/days/{day_number}/responses`
 - **Auth**: Bearer token required
-- **Description**: Returns the user's saved responses for a day (enables resuming in-progress days or reviewing past completed days for Day 60 growth comparison).
-
----
+- **Description**: Returns previously submitted responses for review or resuming.
 
 ### 2.4 Get Progress / Unlock State
 - **Endpoint**: `GET /api/v1/foundation/progress`
 - **Auth**: Bearer token required
-- **Description**: Returns the overall progress state, completed day numbers, current phase, current day, and Day 0 completion status.
+- **Description**: Returns overall student progress, unlocked phase (1, 2, or 3), current active day, list of completed days, `phase1_completed`, and `phase2_completed` boolean flags.
+
+---
+
+## 3. The 9 ThinkClear Thinking Traps
+All Phase 1 and Phase 2 scenarios draw from the official 9 thinking traps:
+1. **Mind Reading**: Assuming others' intentions without evidence.
+2. **Fortune Telling**: Treating an unverified prediction as certain.
+3. **Emotional Reasoning**: Treating a feeling as proof of reality.
+4. **Catastrophizing**: Assuming the absolute worst outcome.
+5. **Confirmation Bias**: Only seeing details that confirm the feared story.
+6. **Rumination**: Repetitive, circular overthinking of past events.
+7. **All-or-Nothing Thinking**: Treating a minor gap as total failure or framing as either-or.
+8. **Validation Seeking**: Allowing external approval to define self-worth or decisions.
+9. **Sunk Cost Fallacy**: Continuing a path solely because of past unrecoverable investment.

@@ -1,765 +1,954 @@
 {
-	"info": {
-		"_postman_id": "thinkclear-api-collection-v1",
-		"name": "ThinkClear REST API Collection",
-		"description": "Complete Postman collection for ThinkClear mobile application REST APIs, Foundation Program Phase 1 (Days 1-20), and Admin endpoints, including Sanctum Bearer token auto-handling, Social Login (Google/Apple), Profile Updates, and OTP Password Reset.",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"variable": [
-		{
-			"key": "base_url",
-			"value": "http://localhost:8000/api/v1",
-			"type": "string"
-		},
-		{
-			"key": "bearer_token",
-			"value": "",
-			"type": "string"
-		}
-	],
-	"item": [
-		{
-			"name": "1. Authentication",
-			"item": [
-				{
-					"name": "Register User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (pm.response.code === 201) {",
-									"    var jsonData = pm.response.json();",
-									"    if (jsonData.data && jsonData.data.access_token) {",
-									"        pm.collectionVariables.set('bearer_token', jsonData.data.access_token);",
-									"        console.log('Bearer token saved:', jsonData.data.access_token);",
-									"    }",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Student User\",\n  \"email\": \"student@thinkclear.co.in\",\n  \"password\": \"password123\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/register",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"register"
-							]
-						},
-						"description": "Registers a new student user and saves the bearer_token automatically."
-					},
-					"response": []
-				},
-				{
-					"name": "Login User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (pm.response.code === 200) {",
-									"    var jsonData = pm.response.json();",
-									"    if (jsonData.data && jsonData.data.access_token) {",
-									"        pm.collectionVariables.set('bearer_token', jsonData.data.access_token);",
-									"        console.log('Bearer token saved:', jsonData.data.access_token);",
-									"    }",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"email\": \"arun@example.com\",\n  \"password\": \"password123\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/login",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"login"
-							]
-						},
-						"description": "Logs in user and auto-saves the Sanctum bearer token."
-					},
-					"response": []
-				},
-				{
-					"name": "Social Login (Google / Apple)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (pm.response.code === 200) {",
-									"    var jsonData = pm.response.json();",
-									"    if (jsonData.data && jsonData.data.access_token) {",
-									"        pm.collectionVariables.set('bearer_token', jsonData.data.access_token);",
-									"        console.log('Bearer token saved:', jsonData.data.access_token);",
-									"    }",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"provider\": \"google\",\n  \"provider_id\": \"109876543210987654321\",\n  \"email\": \"social.user@gmail.com\",\n  \"name\": \"Social User\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/social-login",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"social-login"
-							]
-						},
-						"description": "Authenticates via Google or Apple OAuth ID and returns Sanctum Bearer Token."
-					},
-					"response": []
-				},
-				{
-					"name": "Forgot Password (Request OTP)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"email\": \"arun@example.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/forgot-password",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"forgot-password"
-							]
-						},
-						"description": "Generates 6-digit OTP code for password reset."
-					},
-					"response": []
-				},
-				{
-					"name": "Reset Password (Using OTP)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"email\": \"arun@example.com\",\n  \"otp\": \"123456\",\n  \"password\": \"newpassword123\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/reset-password",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"reset-password"
-							]
-						},
-						"description": "Resets user password using email, 6-digit OTP, and new password."
-					},
-					"response": []
-				},
-				{
-					"name": "Get User Profile",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/user/profile",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"user",
-								"profile"
-							]
-						},
-						"description": "Returns current user details, day progress (1-60), and active phase."
-					},
-					"response": []
-				},
-				{
-					"name": "Update User Profile",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Arun R. Mishra\",\n  \"email\": \"arun@example.com\",\n  \"password\": \"newpassword123\",\n  \"current_password\": \"password123\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/user/profile",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"user",
-								"profile"
-							]
-						},
-						"description": "Updates authenticated user profile name, email, or password."
-					},
-					"response": []
-				},
-				{
-					"name": "Logout User",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/logout",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"logout"
-							]
-						},
-						"description": "Revokes current access token."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "2. Foundation Program (Phase 1 APIs)",
-			"item": [
-				{
-					"name": "2.1 Get Day Content (Day 1)",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/foundation/phase1/days/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"foundation",
-								"phase1",
-								"days",
-								"1"
-							]
-						},
-						"description": "Returns full curriculum bundle for Day 1 matching exact handoff specification."
-					},
-					"response": []
-				},
-				{
-					"name": "2.2 Submit Day Responses (Day 1)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"responses\": {\n    \"detect.facts\": \"He read my message three hours ago and hasn't replied.\",\n    \"detect.story\": \"He's upset with me and ignoring me.\",\n    \"decode.selected_option\": \"mind_reading\",\n    \"reality_check.q1\": \"He read the message three hours ago.\",\n    \"reality_check.q2\": \"That he's upset with me.\",\n    \"reality_check.q3\": \"He hasn't replied yet.\",\n    \"reality_check.q4\": \"He often replies late when busy at work.\",\n    \"reality_check.q5\": \"I'd tell them to wait before assuming the worst.\",\n    \"reframe.alt_explanations\": [\n      \"He got busy at work.\",\n      \"His phone died.\",\n      \"He's driving.\"\n    ],\n    \"reframe.one_more_explanation\": \"He's in a meeting and can't check his phone.\",\n    \"intervention.action\": \"Wait until end of day, then send one calm follow-up message.\",\n    \"internalize.principle\": \"A delayed reply is a fact, not a betrayal.\",\n    \"closing.journal\": \"I do this with my sister too — I'll notice it next time.\"\n  },\n  \"input_method\": \"typed\",\n  \"started_at\": \"2026-08-10T09:00:00Z\",\n  \"completed_at\": \"2026-08-10T09:05:00Z\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/foundation/phase1/days/1/responses",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"foundation",
-								"phase1",
-								"days",
-								"1",
-								"responses"
-							]
-						},
-						"description": "Submits all 6 step responses, updates user progress, and returns decode validation results."
-					},
-					"response": []
-				},
-				{
-					"name": "2.3 Get Saved Responses (Day 1)",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/foundation/phase1/days/1/responses",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"foundation",
-								"phase1",
-								"days",
-								"1",
-								"responses"
-							]
-						},
-						"description": "Returns user's saved responses for resuming or reviewing."
-					},
-					"response": []
-				},
-				{
-					"name": "2.4 Get Progress / Unlock State",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/foundation/progress",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"foundation",
-								"progress"
-							]
-						},
-						"description": "Returns overall user progress state, completed day numbers, and Phase 1 completion flag."
-					},
-					"response": []
-				},
-				{
-					"name": "2.5 Submit Day 20 Responses (Checkpoint)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"responses\": {\n    \"detect.facts\": \"My manager asked to see me before I leave today.\",\n    \"detect.story\": \"I'm in trouble.\",\n    \"decode.selected_option\": \"fortune_telling\",\n    \"reality_check.q1\": \"My manager asked to see me before I leave.\",\n    \"reality_check.q2\": \"That something is wrong.\",\n    \"reframe.alt_explanations\": [\n      \"Manager wants to discuss a project.\",\n      \"Routine 1-on-1 meeting.\",\n      \"Manager needs information before tomorrow.\",\n      \"Several team members meeting today.\"\n    ],\n    \"intervention.action\": \"Attend meeting with an open mind.\",\n    \"internalize.principle\": \"Wait for evidence before drawing conclusions.\"\n  },\n  \"input_method\": \"typed\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/foundation/phase1/days/20/responses",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"foundation",
-								"phase1",
-								"days",
-								"20",
-								"responses"
-							]
-						},
-						"description": "Submits Day 20 responses and returns the end_of_day_walkthrough object."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "3. Case Engine & Daily Practice",
-			"item": [
-				{
-					"name": "Get Today's Case Scenario",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/cases/today",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"cases",
-								"today"
-							]
-						},
-						"description": "Retrieves the active scenario for the user's current day based on Phase 0-3 scaffolding."
-					},
-					"response": []
-				},
-				{
-					"name": "Submit Reflection",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"case_id\": 1,\n  \"internalize_text\": \"Silence is not a message. It's a blank I fill in — check before I fill it with the worst option.\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/cases/submit-reflection",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"cases",
-								"submit-reflection"
-							]
-						},
-						"description": "Stores the user's 1-line INTERNALIZE principle (Minimal Retention Rule) and increments day progress."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "4. 60-Day Foundation Survey (PDF 1 Spec)",
-			"item": [
-				{
-					"name": "Submit Feedback (Rating >= 4)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"judgment_impact_score\": 5,\n  \"technique_applied\": \"multiple\",\n  \"recommend_score\": 5,\n  \"testimonial_text\": \"ThinkClear completely changed how I react to uncertainty.\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/foundation-feedback",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"foundation-feedback"
-							]
-						},
-						"description": "Submits 60-day Foundation Course feedback for high impact rating with testimonial text."
-					},
-					"response": []
-				},
-				{
-					"name": "Submit Feedback (Rating <= 2)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"judgment_impact_score\": 2,\n  \"technique_applied\": \"not_yet\",\n  \"recommend_score\": 2,\n  \"improvement_feedback\": \"I would like more scenarios related to workplace negotiations.\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/foundation-feedback",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"foundation-feedback"
-							]
-						},
-						"description": "Submits 60-day Foundation Course feedback for low impact rating with improvement feedback."
-					},
-					"response": []
-				},
-				{
-					"name": "Check Feedback Status",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/foundation-feedback/check",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"foundation-feedback",
-								"check"
-							]
-						},
-						"description": "Checks if the current user has already submitted the 60-day feedback survey."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "5. Admin Panel APIs",
-			"item": [
-				{
-					"name": "Get Admin Dashboard Analytics",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/admin/dashboard",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"admin",
-								"dashboard"
-							]
-						},
-						"description": "Returns total users, active cases, average impact score, and recent feedback testimonials."
-					},
-					"response": []
-				},
-				{
-					"name": "List All Cases",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/admin/cases",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"admin",
-								"cases"
-							]
-						},
-						"description": "Returns list of all cases in the 60-day curriculum library."
-					},
-					"response": []
-				},
-				{
-					"name": "Create New Case",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{bearer_token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"case_id\": \"P1-002\",\n  \"domain\": \"Career\",\n  \"phase_target\": 1,\n  \"trap_target\": [\n    \"Catastrophizing\"\n  ],\n  \"opening_scenario\": \"Your manager sends a calendar invite titled 'Quick Sync' with no agenda for tomorrow morning.\",\n  \"step1_detect\": {\n    \"fact\": \"Manager sent a calendar invite with no agenda.\",\n    \"story\": \"I am going to get fired tomorrow.\"\n  },\n  \"step2_decode\": {\n    \"trap\": \"Catastrophizing\",\n    \"explanation\": \"Assuming the absolute worst outcome with zero evidence.\"\n  },\n  \"step5_intervention\": {\n    \"action\": \"Reply politely asking if there is anything specific you should prepare for the meeting.\"\n  },\n  \"step6_internalize\": {\n    \"principle\": \"No agenda is a lack of detail, not a death sentence.\"\n  }\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/admin/cases",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"admin",
-								"cases"
-							]
-						},
-						"description": "Uploads a new scenario case to the library."
-					},
-					"response": []
-				}
-			]
-		}
-	]
+    "info": {
+        "_postman_id": "thinkclear-api-collection-v1",
+        "name": "ThinkClear REST API Collection",
+        "description": "Complete Postman collection for ThinkClear mobile application REST APIs, Foundation Program Phase 1 (Days 1-20), and Admin endpoints, including Sanctum Bearer token auto-handling, Social Login (Google/Apple), Profile Updates, and OTP Password Reset.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000/api/v1",
+            "type": "string"
+        },
+        {
+            "key": "bearer_token",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "1. Authentication",
+            "item": [
+                {
+                    "name": "Register User",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 201) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    if (jsonData.data && jsonData.data.access_token) {",
+                                    "        pm.collectionVariables.set('bearer_token', jsonData.data.access_token);",
+                                    "        console.log('Bearer token saved:', jsonData.data.access_token);",
+                                    "    }",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Student User\",\n  \"email\": \"student@thinkclear.co.in\",\n  \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "register"
+                            ]
+                        },
+                        "description": "Registers a new student user and saves the bearer_token automatically."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login User",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    if (jsonData.data && jsonData.data.access_token) {",
+                                    "        pm.collectionVariables.set('bearer_token', jsonData.data.access_token);",
+                                    "        console.log('Bearer token saved:', jsonData.data.access_token);",
+                                    "    }",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"arun@example.com\",\n  \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "login"
+                            ]
+                        },
+                        "description": "Logs in user and auto-saves the Sanctum bearer token."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Social Login (Google / Apple)",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    if (jsonData.data && jsonData.data.access_token) {",
+                                    "        pm.collectionVariables.set('bearer_token', jsonData.data.access_token);",
+                                    "        console.log('Bearer token saved:', jsonData.data.access_token);",
+                                    "    }",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"provider\": \"google\",\n  \"provider_id\": \"109876543210987654321\",\n  \"email\": \"social.user@gmail.com\",\n  \"name\": \"Social User\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/social-login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "social-login"
+                            ]
+                        },
+                        "description": "Authenticates via Google or Apple OAuth ID and returns Sanctum Bearer Token."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Forgot Password (Request OTP)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"arun@example.com\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/forgot-password",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "forgot-password"
+                            ]
+                        },
+                        "description": "Generates 6-digit OTP code for password reset."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Reset Password (Using OTP)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"arun@example.com\",\n  \"otp\": \"123456\",\n  \"password\": \"newpassword123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/reset-password",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reset-password"
+                            ]
+                        },
+                        "description": "Resets user password using email, 6-digit OTP, and new password."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get User Profile",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/user/profile",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "user",
+                                "profile"
+                            ]
+                        },
+                        "description": "Returns current user details, day progress (1-60), and active phase."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update User Profile",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Arun R. Mishra\",\n  \"email\": \"arun@example.com\",\n  \"password\": \"newpassword123\",\n  \"current_password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/user/profile",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "user",
+                                "profile"
+                            ]
+                        },
+                        "description": "Updates authenticated user profile name, email, or password."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Logout User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/logout",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "logout"
+                            ]
+                        },
+                        "description": "Revokes current access token."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "2. Curriculum (Phases 1 & 2 \u2022 Days 1\u201340)",
+            "item": [
+                {
+                    "name": "2.0 Get All Curriculum Introductions",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/foundation/introductions",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "introductions"
+                            ]
+                        },
+                        "description": "Returns app front page intro, Phase 1 intro, Phase 2 intro, and Phase 3 intro copy."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.0b Get Phase 2 Introduction",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/foundation/phase/2/intro",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "phase",
+                                "2",
+                                "intro"
+                            ]
+                        },
+                        "description": "Returns specific introduction for Phase 2: Application (Days 21\u201340)."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.1 Get Day Content (Day 1)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/foundation/phase1/days/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "phase1",
+                                "days",
+                                "1"
+                            ]
+                        },
+                        "description": "Returns full curriculum bundle for Day 1 matching exact handoff specification."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.2 Submit Day Responses (Day 1)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"responses\": {\n    \"detect.facts\": \"He read my message three hours ago and hasn't replied.\",\n    \"detect.story\": \"He's upset with me and ignoring me.\",\n    \"decode.selected_option\": \"mind_reading\",\n    \"reality_check.q1\": \"He read the message three hours ago.\",\n    \"reality_check.q2\": \"That he's upset with me.\",\n    \"reality_check.q3\": \"He hasn't replied yet.\",\n    \"reality_check.q4\": \"He often replies late when busy at work.\",\n    \"reality_check.q5\": \"I'd tell them to wait before assuming the worst.\",\n    \"reframe.alt_explanations\": [\n      \"He got busy at work.\",\n      \"His phone died.\",\n      \"He's driving.\"\n    ],\n    \"reframe.one_more_explanation\": \"He's in a meeting and can't check his phone.\",\n    \"intervention.action\": \"Wait until end of day, then send one calm follow-up message.\",\n    \"internalize.principle\": \"A delayed reply is a fact, not a betrayal.\",\n    \"closing.journal\": \"I do this with my sister too \u2014 I'll notice it next time.\"\n  },\n  \"input_method\": \"typed\",\n  \"started_at\": \"2026-08-10T09:00:00Z\",\n  \"completed_at\": \"2026-08-10T09:05:00Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/foundation/phase1/days/1/responses",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "phase1",
+                                "days",
+                                "1",
+                                "responses"
+                            ]
+                        },
+                        "description": "Submits all 6 step responses, updates user progress, and returns decode validation results."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.3 Get Saved Responses (Day 1)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/foundation/phase1/days/1/responses",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "phase1",
+                                "days",
+                                "1",
+                                "responses"
+                            ]
+                        },
+                        "description": "Returns user's saved responses for resuming or reviewing."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.4 Get Progress / Unlock State",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/foundation/progress",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "progress"
+                            ]
+                        },
+                        "description": "Returns overall user progress state, completed day numbers, and Phase 1 completion flag."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.5 Submit Day 20 Responses (Checkpoint)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"responses\": {\n    \"detect.facts\": \"My manager asked to see me before I leave today.\",\n    \"detect.story\": \"I'm in trouble.\",\n    \"decode.selected_option\": \"fortune_telling\",\n    \"reality_check.q1\": \"My manager asked to see me before I leave.\",\n    \"reality_check.q2\": \"That something is wrong.\",\n    \"reframe.alt_explanations\": [\n      \"Manager wants to discuss a project.\",\n      \"Routine 1-on-1 meeting.\",\n      \"Manager needs information before tomorrow.\",\n      \"Several team members meeting today.\"\n    ],\n    \"intervention.action\": \"Attend meeting with an open mind.\",\n    \"internalize.principle\": \"Wait for evidence before drawing conclusions.\"\n  },\n  \"input_method\": \"typed\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/foundation/phase1/days/20/responses",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "phase1",
+                                "days",
+                                "20",
+                                "responses"
+                            ]
+                        },
+                        "description": "Submits Day 20 responses and returns the end_of_day_walkthrough object."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.6 Get Phase 2 Day Content (Day 21)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/foundation/phase2/days/21",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "phase2",
+                                "days",
+                                "21"
+                            ]
+                        },
+                        "description": "Returns Phase 2 Day 21 curriculum bundle (Passed Over for Promotion)."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.7 Submit Day 21 Responses",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"responses\": {\n        \"detect.facts\": \"I have worked here three years with positive reviews. Another colleague was promoted without explanation.\",\n        \"detect.story\": \"My manager no longer believes in me.\",\n        \"decode.selected_option\": \"validation_seeking\",\n        \"reality_check.q1\": \"I wasn't promoted.\",\n        \"reality_check.q2\": \"Assuming my manager lost confidence in me.\",\n        \"reality_check.q3\": \"Colleague got promoted instead.\",\n        \"reality_check.q4\": \"My past performance was consistently appreciated.\",\n        \"reality_check.q5\": \"What specific criteria were used for the promotion?\",\n        \"reframe.alt_explanations\": [\n            \"Colleague had specific skills needed for that role.\",\n            \"Another opportunity is planned.\",\n            \"Budget or timing constraint.\",\n            \"Other factors I don't know yet.\"\n        ],\n        \"intervention.action\": \"Schedule a 1-on-1 with manager to ask for constructive feedback on future growth.\",\n        \"internalize.principle\": \"Not receiving what I expected doesn't automatically explain why. Good judgment begins when I separate facts from the story my mind creates.\",\n        \"closing.journal\": \"I will discuss directly with my manager before assuming anything.\"\n    },\n    \"input_method\": \"typed\",\n    \"started_at\": \"2026-09-25T10:00:00Z\",\n    \"completed_at\": \"2026-09-25T10:05:00Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/foundation/phase2/days/21/responses",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "phase2",
+                                "days",
+                                "21",
+                                "responses"
+                            ]
+                        },
+                        "description": "Submits Day 21 Phase 2 responses, advances progress, and returns decode validation."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.8 Get Saved Responses (Day 21)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/foundation/phase2/days/21/responses",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "phase2",
+                                "days",
+                                "21",
+                                "responses"
+                            ]
+                        },
+                        "description": "Returns user's saved responses for Phase 2 Day 21."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2.9 Submit Day 40 Responses (Phase 2 Checkpoint)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"responses\": {\n        \"detect.facts\": \"A relocation opportunity to another country exists with uncertainty on both staying and leaving.\",\n        \"detect.story\": \"If I don't go, I'll regret it forever, but moving could be a disaster.\",\n        \"decode.selected_option\": \"fortune_telling\",\n        \"reality_check.q1\": \"Opportunity exists but outcome is uncertain.\",\n        \"reality_check.q2\": \"Predicting failure or regret with no evidence.\",\n        \"reframe.alt_explanations\": [\n            \"Stay and pursue growth locally.\",\n            \"Relocate now with clear checkpoints.\",\n            \"Negotiate delayed transition.\",\n            \"Define conditions under which to reconsider.\"\n        ],\n        \"intervention.action\": \"Evaluate evidence, priorities, and reversibility; set decision date without demanding impossible certainty.\",\n        \"internalize.principle\": \"Good judgment is not the ability to predict the future. It is the ability to make a reasoned choice under uncertainty.\",\n        \"closing.journal\": \"Accepting uncertainty is the hallmark of mature judgment.\"\n    },\n    \"input_method\": \"typed\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/foundation/phase2/days/40/responses",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation",
+                                "phase2",
+                                "days",
+                                "40",
+                                "responses"
+                            ]
+                        },
+                        "description": "Submits Day 40 responses, completing Phase 2 and unlocking Phase 3."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "3. Case Engine & Daily Practice",
+            "item": [
+                {
+                    "name": "Get Today's Case Scenario",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/cases/today",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "cases",
+                                "today"
+                            ]
+                        },
+                        "description": "Retrieves the active scenario for the user's current day based on Phase 0-3 scaffolding."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Submit Reflection",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"case_id\": 1,\n  \"internalize_text\": \"Silence is not a message. It's a blank I fill in \u2014 check before I fill it with the worst option.\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/cases/submit-reflection",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "cases",
+                                "submit-reflection"
+                            ]
+                        },
+                        "description": "Stores the user's 1-line INTERNALIZE principle (Minimal Retention Rule) and increments day progress."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "4. 60-Day Foundation Survey (PDF 1 Spec)",
+            "item": [
+                {
+                    "name": "Submit Feedback (Rating >= 4)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"judgment_impact_score\": 5,\n  \"technique_applied\": \"multiple\",\n  \"recommend_score\": 5,\n  \"testimonial_text\": \"ThinkClear completely changed how I react to uncertainty.\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/foundation-feedback",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation-feedback"
+                            ]
+                        },
+                        "description": "Submits 60-day Foundation Course feedback for high impact rating with testimonial text."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Submit Feedback (Rating <= 2)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"judgment_impact_score\": 2,\n  \"technique_applied\": \"not_yet\",\n  \"recommend_score\": 2,\n  \"improvement_feedback\": \"I would like more scenarios related to workplace negotiations.\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/foundation-feedback",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation-feedback"
+                            ]
+                        },
+                        "description": "Submits 60-day Foundation Course feedback for low impact rating with improvement feedback."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Check Feedback Status",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/foundation-feedback/check",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "foundation-feedback",
+                                "check"
+                            ]
+                        },
+                        "description": "Checks if the current user has already submitted the 60-day feedback survey."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "5. Admin Panel APIs",
+            "item": [
+                {
+                    "name": "Get Admin Dashboard Analytics",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/admin/dashboard",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "dashboard"
+                            ]
+                        },
+                        "description": "Returns total users, active cases, average impact score, and recent feedback testimonials."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "List All Cases",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/admin/cases",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "cases"
+                            ]
+                        },
+                        "description": "Returns list of all cases in the 60-day curriculum library."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create New Case",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{bearer_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"case_id\": \"P1-002\",\n  \"domain\": \"Career\",\n  \"phase_target\": 1,\n  \"trap_target\": [\n    \"Catastrophizing\"\n  ],\n  \"opening_scenario\": \"Your manager sends a calendar invite titled 'Quick Sync' with no agenda for tomorrow morning.\",\n  \"step1_detect\": {\n    \"fact\": \"Manager sent a calendar invite with no agenda.\",\n    \"story\": \"I am going to get fired tomorrow.\"\n  },\n  \"step2_decode\": {\n    \"trap\": \"Catastrophizing\",\n    \"explanation\": \"Assuming the absolute worst outcome with zero evidence.\"\n  },\n  \"step5_intervention\": {\n    \"action\": \"Reply politely asking if there is anything specific you should prepare for the meeting.\"\n  },\n  \"step6_internalize\": {\n    \"principle\": \"No agenda is a lack of detail, not a death sentence.\"\n  }\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/admin/cases",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "cases"
+                            ]
+                        },
+                        "description": "Uploads a new scenario case to the library."
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
 }

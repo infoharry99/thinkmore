@@ -42,9 +42,9 @@
     <!-- Stat 2 -->
     <div class="stat-card" style="display: flex; justify-content: space-between; align-items: center;">
         <div>
-            <div class="stat-label"><i class="bi bi-calendar-check-fill" style="color: #0284C7;"></i> Foundation Days</div>
-            <div class="stat-value" style="margin-top: 4px;">{{ $stats['foundation_days_count'] ?? 20 }}</div>
-            <span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 11px; margin-top: 8px;">Phase 1 Days Seeded</span>
+            <div class="stat-label"><i class="bi bi-calendar-check-fill" style="color: #0284C7;"></i> Curriculum Days</div>
+            <div class="stat-value" style="margin-top: 4px;">{{ $stats['foundation_days_count'] ?? 40 }}</div>
+            <span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 11px; margin-top: 8px;">Phases 1 & 2 (Days 1–40)</span>
         </div>
         <div style="width: 52px; height: 52px; border-radius: 16px; background: #E0F2FE; color: #0284C7; display: flex; align-items: center; justify-content: center; font-size: 24px;">
             <i class="bi bi-journal-text"></i>

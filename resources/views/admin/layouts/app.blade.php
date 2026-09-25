@@ -297,7 +297,7 @@
 
             <div class="nav-section-title" style="margin-top: 10px;">Curriculum & Content</div>
             <a href="{{ route('admin.foundation.index') }}" class="nav-item {{ request()->routeIs('admin.foundation*') ? 'active' : '' }}">
-                <i class="bi bi-calendar2-check-fill"></i> Foundation Days (Phase 1)
+                <i class="bi bi-calendar2-check-fill"></i> Curriculum Days (Phases 1 & 2)
             </a>
             <a href="{{ route('admin.feedbacks.index') }}" class="nav-item {{ request()->routeIs('admin.feedbacks*') ? 'active' : '' }}">
                 <i class="bi bi-chat-square-quote-fill"></i> Student Feedbacks

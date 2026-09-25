@@ -1,33 +1,43 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Foundation Program Phase 1 (Days 1–20)')
+@section('title', 'Curriculum Management (Phases 1 & 2 • Days 1–40)')
 
 @section('content')
 <div class="card-box" style="padding: 28px;">
     <!-- Top Action Header -->
     <div class="card-header-flex" style="margin-bottom: 20px;">
         <div>
-            <h3 style="font-size: 20px; font-weight: 800; color: #111827; margin: 0;">Foundation Program Phase 1 Curriculum (Days 1–20)</h3>
-            <p style="font-size: 13px; color: #6B7280; margin-top: 4px;">Manage the 20 judgment scenarios, 6-step framework copy, decode options, tips, and JSON bundles served by the REST API.</p>
+            <h3 style="font-size: 20px; font-weight: 800; color: #111827; margin: 0;">Curriculum Management (Days 1–40)</h3>
+            <p style="font-size: 13px; color: #6B7280; margin-top: 4px;">Phase 1: Foundation (Days 1–20) & Phase 2: Application (Days 21–40) scenarios, 6-step framework copy, and REST API bundles.</p>
         </div>
         <div style="display: flex; gap: 10px; align-items: center;">
             <a href="{{ route('admin.foundation.create') }}" class="btn-primary" style="padding: 10px 20px; font-weight: 700; border-radius: 10px;">
-                <i class="bi bi-plus-circle"></i> Add New Foundation Day
+                <i class="bi bi-plus-circle"></i> Add Curriculum Day
             </a>
         </div>
     </div>
 
     <!-- Search & Filter Controls Bar -->
     <form action="{{ route('admin.foundation.index') }}" method="GET" style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 18px; border-radius: 14px; margin-bottom: 24px;">
-        <div style="display: grid; grid-template-columns: 2.5fr 1fr 1fr 0.8fr 0.8fr; gap: 12px; align-items: center;">
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr 0.8fr 0.8fr; gap: 12px; align-items: center;">
             
             <!-- Search Text Input -->
             <div>
                 <label style="display: block; font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 4px; text-transform: uppercase;">Search Curriculum Days</label>
                 <div style="position: relative;">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by Day #, Title, Domain, Trap, Skill..." class="form-control" style="padding-left: 36px; border-radius: 10px; font-size: 13px;">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by Day #, Title, Domain, Trap..." class="form-control" style="padding-left: 36px; border-radius: 10px; font-size: 13px;">
                     <i class="bi bi-search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94A3B8;"></i>
                 </div>
+            </div>
+
+            <!-- Phase Filter Dropdown -->
+            <div>
+                <label style="display: block; font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 4px; text-transform: uppercase;">Phase</label>
+                <select name="phase" class="form-select" style="border-radius: 10px; font-size: 13px;">
+                    <option value="">All Phases</option>
+                    <option value="1" {{ request('phase') == '1' ? 'selected' : '' }}>Phase 1 (Days 1–20)</option>
+                    <option value="2" {{ request('phase') == '2' ? 'selected' : '' }}>Phase 2 (Days 21–40)</option>
+                </select>
             </div>
 
             <!-- Domain Filter Dropdown -->
@@ -71,8 +81,8 @@
     <!-- Results Status Bar -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding: 0 4px;">
         <div style="font-size: 13px; color: #475569; font-weight: 600;">
-            Showing {{ $days->firstItem() ?? 0 }} to {{ $days->lastItem() ?? 0 }} of {{ $days->total() }} Foundation Days
-            @if(request('search') || request('domain') || request('trap'))
+            Showing {{ $days->firstItem() ?? 0 }} to {{ $days->lastItem() ?? 0 }} of {{ $days->total() }} Curriculum Days
+            @if(request('search') || request('phase') || request('domain') || request('trap'))
                 <span style="color: #0284C7; font-weight: 700;">(Filtered Results)</span>
             @endif
         </div>
@@ -84,21 +94,34 @@
             <thead class="table-light">
                 <tr>
                     <th>Day #</th>
+                    <th>Phase</th>
                     <th>Scenario Title</th>
                     <th>Domain</th>
                     <th>Primary Trap</th>
                     <th>Primary Skill</th>
                     <th>Learning Objective</th>
                     <th>Scenario Preview</th>
-                    <th style="min-width: 180px;">Actions</th>
+                    <th style="min-width: 170px;">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($days as $d)
-                @php $bundle = $d->content_bundle; @endphp
+                @php 
+                    $bundle = $d->content_bundle; 
+                    $phaseNum = $d->phase ?? ($d->day_number > 20 ? 2 : 1);
+                @endphp
                 <tr>
                     <td>
                         <span class="badge badge-green" style="font-size: 13px; font-weight: 700;">Day {{ $d->day_number }}</span>
+                    </td>
+                    <td>
+                        @if($phaseNum == 1)
+                            <span class="badge" style="background: #ECFDF5; color: #047857; font-weight: 700; font-size: 11px;">Phase 1</span>
+                        @elseif($phaseNum == 2)
+                            <span class="badge" style="background: #EEF2FF; color: #4338CA; font-weight: 700; font-size: 11px;">Phase 2</span>
+                        @else
+                            <span class="badge" style="background: #FEF3C7; color: #92400E; font-weight: 700; font-size: 11px;">Phase 3</span>
+                        @endif
                     </td>
                     <td><strong>{{ $d->title }}</strong></td>
                     <td><span class="badge badge-gray">{{ $d->domain }}</span></td>
@@ -112,7 +135,7 @@
                         <strong>{{ $bundle['learning_objective'] ?? '' }}</strong><br>
                         <span style="color: #6B7280; font-size: 12px;">{{ $bundle['mission'] ?? '' }}</span>
                     </td>
-                    <td style="max-width: 260px; font-size: 13px;">{{ Str::limit($bundle['scenario_text'] ?? '', 75) }}</td>
+                    <td style="max-width: 240px; font-size: 13px;">{{ Str::limit($bundle['scenario_text'] ?? '', 70) }}</td>
                     <td>
                         <div style="display: flex; gap: 8px; align-items: center;">
                             <a href="{{ route('admin.foundation.preview', $d->id) }}" style="background: #E0F2FE; color: #0284C7; font-weight: 700; padding: 6px 10px; border-radius: 8px; font-size: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
@@ -133,9 +156,9 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="8" style="text-align: center; color: #9CA3AF; padding: 32px;">
+                    <td colspan="9" style="text-align: center; color: #9CA3AF; padding: 32px;">
                         <i class="bi bi-calendar-x" style="font-size: 28px; display: block; margin-bottom: 8px; color: #CBD5E1;"></i>
-                        No matching Foundation Program days found.
+                        No matching Curriculum days found.
                     </td>
                 </tr>
                 @endforelse

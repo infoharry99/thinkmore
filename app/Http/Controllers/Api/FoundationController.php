@@ -7,12 +7,61 @@ use App\Models\FoundationDay;
 use App\Models\FoundationResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class FoundationController extends Controller
 {
     /**
-     * 2.1 Get Day Content
+     * Get All Curriculum Introductions (App Front Page & Phase Introductions)
+     * GET /api/v1/foundation/introductions
+     */
+    public function getIntroductions()
+    {
+        $filePath = database_path('data/curriculum_intros.json');
+        
+        if (!File::exists($filePath)) {
+            return response()->json([
+                'message' => 'Curriculum introductions not found.'
+            ], 404);
+        }
+
+        $data = json_decode(File::get($filePath), true);
+
+        return response()->json($data, 200);
+    }
+
+    /**
+     * Get Specific Phase Introduction
+     * GET /api/v1/foundation/phase/{phase_number}/intro
+     */
+    public function getPhaseIntro($phase_number)
+    {
+        $phaseNum = (int) $phase_number;
+        $filePath = database_path('data/curriculum_intros.json');
+        
+        if (!File::exists($filePath)) {
+            return response()->json([
+                'message' => 'Curriculum introductions not found.'
+            ], 404);
+        }
+
+        $data = json_decode(File::get($filePath), true);
+        $key = "phase{$phaseNum}_introduction";
+
+        if (!isset($data[$key])) {
+            return response()->json([
+                'message' => "Introduction for Phase {$phaseNum} not found."
+            ], 404);
+        }
+
+        return response()->json($data[$key], 200);
+    }
+
+    /**
+     * 2.1 Get Day Content (Supports Days 1–40 / Phase 1 & 2)
+     * GET /api/v1/foundation/days/{day_number}
      * GET /api/v1/foundation/phase1/days/{day_number}
+     * GET /api/v1/foundation/phase2/days/{day_number}
      */
     public function getDayContent($day_number)
     {
@@ -31,7 +80,9 @@ class FoundationController extends Controller
 
     /**
      * 2.2 Submit Day Responses
+     * POST /api/v1/foundation/days/{day_number}/responses
      * POST /api/v1/foundation/phase1/days/{day_number}/responses
+     * POST /api/v1/foundation/phase2/days/{day_number}/responses
      */
     public function submitDayResponses(Request $request, $day_number)
     {
@@ -53,6 +104,8 @@ class FoundationController extends Controller
             ], 404);
         }
 
+        $dayPhase = $foundationDay->phase ?? ($dayNumber > 20 ? 2 : 1);
+
         // Save or update user response
         $response = FoundationResponse::updateOrCreate(
             [
@@ -60,7 +113,7 @@ class FoundationController extends Controller
                 'day_number' => $dayNumber,
             ],
             [
-                'phase' => $foundationDay->phase ?? 1,
+                'phase' => $dayPhase,
                 'responses' => $request->responses,
                 'input_method' => $request->input_method ?? 'typed',
                 'started_at' => $request->started_at ?? now(),
@@ -72,22 +125,30 @@ class FoundationController extends Controller
         // Advance user progress if user completes current day
         if ($user->current_day <= $dayNumber) {
             $user->current_day = $dayNumber + 1;
-            if ($user->phase === 0) {
+            
+            // Automatically assign appropriate phase
+            if ($user->current_day > 40) {
+                $user->phase = 3;
+            } elseif ($user->current_day > 20) {
+                $user->phase = 2;
+            } else {
                 $user->phase = 1;
             }
+            
             $user->save();
         }
 
         $bundle = $foundationDay->content_bundle;
         $decodeStep = collect($bundle['steps'] ?? [])->firstWhere('key', 'decode');
         
-        // Extract selected option from responses object (supports flat "decode.selected_option" or nested responses)
+        // Extract selected option from responses object (supports flat or nested responses)
         $responsesRaw = $request->responses;
         $selectedOption = null;
 
         if (is_array($responsesRaw)) {
             $selectedOption = $responsesRaw['decode.selected_option'] 
                 ?? $responsesRaw['decode']['selected_option'] 
+                ?? $responsesRaw['decode']['primary_trap']
                 ?? null;
         }
 
@@ -95,16 +156,31 @@ class FoundationController extends Controller
         $explanation = $decodeStep['explanation'] ?? '';
 
         $isCorrect = null;
-        if ($correctOptionKey !== null) {
+        if ($correctOptionKey !== null && $selectedOption !== null) {
             $isCorrect = ($selectedOption === $correctOptionKey);
         }
 
         $unlockedNextDay = $dayNumber + 1;
 
-        // For Day 20 (or when end_of_day_walkthrough exists in day bundle), return walkthrough
+        // Check for Phase 2 End Walkthrough (Day 40)
+        if ($dayNumber == 40 || isset($bundle['end_of_phase2_walkthrough'])) {
+            return response()->json([
+                'day' => $dayNumber,
+                'phase' => 2,
+                'status' => 'completed',
+                'end_of_phase2_walkthrough' => $bundle['end_of_phase2_walkthrough'] ?? [
+                    'summary' => 'Congratulations on completing Phase 2: Application (Days 21–40)!',
+                    'unlocked_phase' => 3
+                ],
+                'unlocked_next_day' => $unlockedNextDay,
+            ], 200);
+        }
+
+        // Check for Phase 1 End Walkthrough (Day 20)
         if ($dayNumber == 20 || isset($bundle['end_of_day_walkthrough'])) {
             return response()->json([
                 'day' => $dayNumber,
+                'phase' => 1,
                 'status' => 'completed',
                 'end_of_day_walkthrough' => $bundle['end_of_day_walkthrough'] ?? null,
                 'unlocked_next_day' => $unlockedNextDay,
@@ -113,9 +189,12 @@ class FoundationController extends Controller
 
         return response()->json([
             'day' => $dayNumber,
+            'phase' => $dayPhase,
             'status' => 'completed',
             'decode_result' => [
                 'selected_option' => $selectedOption,
+                'primary_trap' => $decodeStep['primary_trap'] ?? null,
+                'secondary_traps' => $decodeStep['secondary_traps'] ?? [],
                 'is_correct' => $isCorrect,
                 'explanation' => $explanation,
             ],
@@ -125,7 +204,9 @@ class FoundationController extends Controller
 
     /**
      * 2.3 Get Saved Responses
+     * GET /api/v1/foundation/days/{day_number}/responses
      * GET /api/v1/foundation/phase1/days/{day_number}/responses
+     * GET /api/v1/foundation/phase2/days/{day_number}/responses
      */
     public function getSavedResponses($day_number)
     {
@@ -149,6 +230,7 @@ class FoundationController extends Controller
 
         return response()->json([
             'day' => $dayNumber,
+            'phase' => $savedResponse->phase,
             'status' => $savedResponse->status,
             'responses' => $savedResponse->responses,
             'input_method' => $savedResponse->input_method,
@@ -175,13 +257,25 @@ class FoundationController extends Controller
             ->toArray();
 
         $phase1Completed = count(array_intersect(range(1, 20), $completedDays)) === 20;
+        $phase2Completed = count(array_intersect(range(21, 40), $completedDays)) === 20;
+
+        $currentDay = (int) $user->current_day;
+        if ($currentDay > 40) {
+            $currentPhase = 3;
+        } elseif ($currentDay > 20) {
+            $currentPhase = 2;
+        } else {
+            $currentPhase = 1;
+        }
 
         return response()->json([
             'day0_completed' => (bool) ($user->day0_completed ?? true),
-            'current_phase' => $user->phase == 0 ? 1 : (int) $user->phase,
-            'current_day' => (int) $user->current_day,
+            'current_phase' => $currentPhase,
+            'current_day' => $currentDay,
             'completed_days' => $completedDays,
             'phase1_completed' => $phase1Completed,
+            'phase2_completed' => $phase2Completed,
+            'total_days_available' => 40,
         ], 200);
     }
 }
