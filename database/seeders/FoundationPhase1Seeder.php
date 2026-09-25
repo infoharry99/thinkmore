@@ -14,14 +14,14 @@ class FoundationPhase1Seeder extends Seeder
         $jsonPath = database_path('data/phase1_seed_data.json');
         
         if (!File::exists($jsonPath)) {
-            $this->command->error("Seed file not found at: {$jsonPath}");
+            $this->command?->error("Seed file not found at: {$jsonPath}");
             return;
         }
 
         $days = json_decode(File::get($jsonPath), true);
 
         if (!is_array($days)) {
-            $this->command->error("Invalid JSON data in phase1_seed_data.json");
+            $this->command?->error("Invalid JSON data in phase1_seed_data.json");
             return;
         }
 
@@ -72,6 +72,6 @@ class FoundationPhase1Seeder extends Seeder
             );
         }
 
-        $this->command->info("Successfully seeded all 20 Phase 1 Foundation Program days!");
+        $this->command?->info("Successfully seeded all 20 Phase 1 Foundation Program days!");
     }
 }
