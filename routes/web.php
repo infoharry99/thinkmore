@@ -40,6 +40,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/foundation/{id}/preview', [AdminWebController::class, 'foundationPreview'])->name('admin.foundation.preview');
         Route::delete('/foundation/{id}', [AdminWebController::class, 'foundationDestroy'])->name('admin.foundation.destroy');
         Route::post('/foundation/seed', [AdminWebController::class, 'foundationReSeed'])->name('admin.foundation.seed');
+        Route::get('/foundation/seed-run', [AdminWebController::class, 'foundationReSeed'])->name('admin.foundation.seed.get');
 
         // Case Management CRUD & Interactive Mobile Preview (Legacy)
         Route::get('/cases', [AdminWebController::class, 'casesIndex'])->name('admin.cases.index');
