@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use App\Mail\ResetPasswordOtpMail;
 
 class AuthController extends Controller
 {
@@ -137,6 +140,8 @@ class AuthController extends Controller
             'email' => 'required|email|exists:users,email',
         ]);
 
+        $user = User::where('email', $request->email)->first();
+
         // Generate 6-digit OTP
         $otp = sprintf('%06d', mt_rand(100000, 999999));
 
@@ -148,11 +153,23 @@ class AuthController extends Controller
             ]
         );
 
+        $emailSent = false;
+
+        try {
+            Mail::to($request->email)->send(new ResetPasswordOtpMail($otp, $user));
+            $emailSent = true;
+        } catch (\Throwable $e) {
+            Log::error("Failed to send password reset OTP to {$request->email}: " . $e->getMessage());
+        }
+
         return response()->json([
             'status' => 'success',
-            'message' => 'Password reset OTP has been sent to your email.',
+            'message' => $emailSent 
+                ? 'Password reset OTP has been sent to your email.' 
+                : 'Password reset OTP generated. Email sending is pending SMTP configuration on server.',
             'data' => [
                 'email' => $request->email,
+                'email_sent' => $emailSent,
                 'otp_debug' => $otp, // Useful for app developer testing
                 'expires_in_minutes' => 15,
             ]
