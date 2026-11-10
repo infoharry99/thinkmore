@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
 use Database\Seeders\FoundationPhase1Seeder;
 use Database\Seeders\FoundationPhase2Seeder;
+use Database\Seeders\FoundationPhase3Seeder;
 
 class AdminWebController extends Controller
 {
@@ -375,10 +376,15 @@ class AdminWebController extends Controller
             $seeder = new FoundationPhase2Seeder();
             $seeder->run();
             $msg = 'All 20 Phase 2 Application Curriculum Days (Days 21–40) successfully re-seeded from JSON dataset!';
+        } elseif ($phase == 3) {
+            $seeder = new FoundationPhase3Seeder();
+            $seeder->run();
+            $msg = 'All 20 Phase 3 Decision Fitness Days (Days 41–60) successfully re-seeded from JSON dataset!';
         } else {
             (new FoundationPhase1Seeder())->run();
             (new FoundationPhase2Seeder())->run();
-            $msg = 'All 40 Curriculum Days (Phases 1 & 2, Days 1–40) successfully re-seeded from JSON dataset!';
+            (new FoundationPhase3Seeder())->run();
+            $msg = 'All 60 Curriculum Days (Phases 1, 2 & 3, Days 1–60) successfully re-seeded from JSON dataset!';
         }
 
         return redirect()->route('admin.foundation.index')->with('success', $msg);

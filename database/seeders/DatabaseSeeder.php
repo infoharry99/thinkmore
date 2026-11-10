@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             FoundationPhase1Seeder::class,
             FoundationPhase2Seeder::class,
+            FoundationPhase3Seeder::class,
         ]);
     }
 }
